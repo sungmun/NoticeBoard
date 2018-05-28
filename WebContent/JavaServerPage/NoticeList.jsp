@@ -21,6 +21,9 @@ div.btn-block {
 	text-align: right;
 }
 
+table tbody tr.notice_list:hover {
+	background-color: gray;
+}
 </style>
 </head>
 <body>
