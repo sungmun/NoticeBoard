@@ -1,7 +1,4 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="database.Notice.NoticeDAO"%>
-<%@page import="database.Notice.Notice"%>
-<%@page import="java.sql.*"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
