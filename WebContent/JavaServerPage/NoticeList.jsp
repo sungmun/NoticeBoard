@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<link rel="stylesheet" href="../css/bootstrap.min.css">
 <style type="text/css">
 table {
 	table-layout: fixed;
@@ -43,10 +43,10 @@ table tbody tr.notice_list:hover {
 		<tbody>
 			<%
 				NoticeDAO DAO = NoticeDAO.createNoticeDAO();
-				ArrayList<Notice> list = DAO.getNoticeList();
+				ArrayList<Notice> list = DAO.getNoticeList(1);
 				for (Notice e : list) {
 			%>
-			<tr class="notice_list" style="cursor: pointer;">
+			<tr class="notice_list" style="cursor: pointer;" onclick="showNotice(this);">
 				<td><%=e.getNotice_num() + 1%></td>
 				<td><%=e.getNotice_title()%></td>
 				<td><%=e.getMember_id()%></td>
@@ -63,5 +63,14 @@ table tbody tr.notice_list:hover {
 	<div class="alert-link text-center">
 		<a href="#" onclick="">1</a>
 	</div>
+	<script type="text/javascript">
+		function showNotice(tr_attribute) {
+			var id=tr_attribute.cells[0].innerHTML;
+			var url=window.location.hostname;
+			location.href='./JavaServerPage/NoticeContents.jsp?id='+id;
+		}
+	</script>
+	<script src="../js/jquery-3.3.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
 </body>
 </html>
