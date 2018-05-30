@@ -8,3 +8,5 @@ CREATE TABLE Notice(
     PRIMARY KEY (notice_num),
     FOREIGN KEY (member_id) REFERENCES User (user_id) ON DELETE RESTRICT
 );
+
+ALTER TABLE Notice DROP notice_contents;
