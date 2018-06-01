@@ -14,9 +14,15 @@ section.main {
 	height: 100%;
 	margin: 0 auto;
 }
+	body{
+		background-color: slategrey;
+	}
 </style>
 </head>
 <body class="modal-body">
+	<section style="width: 100%;" class="topbar">
+		<%@ include file="/JavaServerPage/Topbar.jsp"%>
+	</section>
 	<section style="width: 1000px;" class="main">
 		<%@ include file="/JavaServerPage/NoticeList.jsp"%>
 	</section>
