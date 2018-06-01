@@ -14,9 +14,6 @@ section.main {
 	height: 100%;
 	margin: 0 auto;
 }
-	body{
-		background-color: slategrey;
-	}
 </style>
 </head>
 <body class="modal-body">
