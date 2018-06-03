@@ -1,7 +1,7 @@
-<!-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<!DOCTYPE html> -->
+<!DOCTYPE html> 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -12,12 +12,12 @@
 
 </style>
 </head>
-<body class="media-body">
+<body>
 	<header class="page-header">
 		<h2>회원가입</h2>
 	</header>
 	<section>
-		<form action="SingIn.jsp" method="post">
+		<form action="../Singin" method="post">
 		<table class="table-condensed">
 			<tr>
 				<td class="text-capitalize">id</td>
