@@ -31,7 +31,7 @@ public class NoticeDAO extends DataAcessObject {
 			stmt = con.prepareStatement(SQL);
 			stmt.setInt(1, limit * (page - 1));
 			stmt.setInt(2, limit * page);
-
+			
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				Notice notice = new Notice();
@@ -45,6 +45,7 @@ public class NoticeDAO extends DataAcessObject {
 		} catch (SQLException e) {
 			System.err.println("=======================================");
 			System.err.println("NoticeDAO.getNoticeList()");
+			System.err.println(e.getMessage());
 			System.err.println(SQL);
 			System.err.println("=======================================");
 		}
