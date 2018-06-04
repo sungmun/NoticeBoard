@@ -1,4 +1,4 @@
-
+<%@page import="database.User.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -22,13 +22,24 @@
 <body>
 	<div class="info">
 		<div class="member">
-			<button class="login btn-group-vertical btn" onclick="signIn()">sign in</button>
+			<%
+				User user = (User) session.getAttribute("login");
+				if (user == null) {
+			%>
+			<button class="login btn-group-vertical btn" onclick="signIn()">sign
+				in</button>
 			<button class="sing_up btn-group-vertical btn">sign up</button>
+			<%
+				} else {
+			%>
+			<label>ID : <%=user.getId()%></label>
+			<button class="sing_up btn-group-vertical btn">MyPage</button>
+			<%}%>
 		</div>
 	</div>
 	<script type="text/javascript">
 		function signIn() {
-			location.href='./JavaServerPage/SingIns.jsp'
+			location.href = './JavaServerPage/SingIns.jsp'
 		}
 	</script>
 	<script src="../js/jquery-3.3.1.min.js"></script>
