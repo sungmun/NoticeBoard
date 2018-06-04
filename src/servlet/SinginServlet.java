@@ -1,3 +1,4 @@
+package servlet;
 
 
 import java.io.IOException;
@@ -39,13 +40,14 @@ public class SinginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		User user = new User();
-		user.setEmail(request.getParameter("email"));
-		user.setFirstname(request.getParameter("firstname"));
-		user.setSecondname(request.getParameter("secondname"));
-		user.setId(request.getParameter("id"));
-		user.setPassword(request.getParameter("password"));
-		user.setPhone(request.getParameter("phone"));
+		String id=request.getParameter("id");
+		String password=request.getParameter("password");
+		String firstname=request.getParameter("firstname");
+		String secondname=request.getParameter("secondname");
+		String phone=request.getParameter("phone");
+		String email=request.getParameter("email");
+
+		User user = new User(id, password, firstname, secondname, phone, email);
 		UserDAO dao;
 		try {
 			dao = UserDAO.createUserDAO();
