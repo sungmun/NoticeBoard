@@ -1,53 +1,68 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
-<style>
 
-</style>
 </head>
 <body>
-	<header class="page-header">
-		<h2>회원가입</h2>
-	</header>
-	<section>
-		<form action="../Singin" method="post">
-		<table class="table-condensed">
-			<tr>
-				<td class="text-capitalize">id</td>
-				<td colspan="2"><input type="text" name="id" id="user_id" class="input-sm"></td>
-			</tr>
-			<tr>
-				<td class="text-capitalize">password</td>
-				<td colspan="2"><input type="password" name="password" id="user_password" autocomplete="new-password" class="input-sm"></td>
-			</tr>
-			<tr>
-				<td class="text-capitalize">name</td>
-				<td><input type="text" name="firstname" id="user_firstname" placeholder="First name" class="input-sm" width="10"></td>
-				<td><input type="text" name="secondname" id="user_secondname"placeholder="Second name" class="input-sm"></td>
-			</tr>
-			<tr>
-				<td class="text-capitalize">phone</td>
-				<td colspan="2"><input type="text" name="phone" id="user_phone"class="input-sm" width="100%"></td>
-			</tr>
-			<tr>
-				<td class="text-capitalize">email</td>
-				<td colspan="2"><input type="email" name="email" id="user_email"class="input-sm"></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="submit" value="회원가입" class="center-block btn">				
-				</td>
-			</tr>
-		</table>
-	</form>
-	</section>
+	<div class="page-header">
+		<h1>회원가입</h1>
+	</div>
+	<div class="col-md-6 col-md-offset-3">
+		<form role="form">
+			<div class="form-group">
+				<label for="InputEmail">ID</label>
+				<div class="input-group">
+					<input type="email" class="form-control" id="id" placeholder="ID">
+					<span class="input-group-btn">
+						<button class="btn btn-success">중복확인</button>
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="InputPassword1">비밀번호</label> <input type="password"
+					class="form-control" id="InputPassword1" placeholder="비밀번호">
+			</div>
+			<div class="form-group">
+				<label for="InputPassword2">비밀번호 확인</label> <input type="password"
+					class="form-control" id="InputPassword2" placeholder="비밀번호 확인">
+				<p class="help-block">비밀번호 확인을 위해 다시한번 입력 해 주세요</p>
+			</div>
+			<div class="form-group">
+				<label for="username">이름</label>
+				<div class="row">
+					<div class="col-md-6">
+						<input type="text" class="form-control" id="username"
+							placeholder="FirstName">
+					</div>
+					<div class="col-md-6">
+						<input type="text" class="form-control" id="username"
+							placeholder="SecondName">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="InputEmail">이메일 주소</label> <input type="email"
+					class="form-control" id="InputEmail" placeholder="이메일 주소">
+			</div>
+			<div class="form-group">
+				<label for="username">휴대폰 번호</label> <input type="tel"
+					class="form-control" id="username" placeholder="- 없이 입력해 주세요">
+				<span class="input-group-btn"> </span>
+			</div>
+			<div class="form-group text-center">
+				<button type="submit" class="btn btn-info">
+					회원가입<i class="fa fa-check spaceLeft"></i>
+				</button>
+			</div>
+		</form>
+	</div>
 	<script src="../js/jquery-3.3.1.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 </body>
