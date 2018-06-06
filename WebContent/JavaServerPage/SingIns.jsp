@@ -9,21 +9,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NoticeBoard</title>
 <link rel="stylesheet" href="../css/bootstrap.min.css">
-<style type="text/css">
-section.main{
-	height: 100%;
-	margin: 0 auto;
-}
-</style>
 </head>
-<body class="modal-body">
-	<section style="width: 100%;" class="topbar">
-		<%@ include file="./Topbar.jsp"%>
-	</section>
-	<section style="width: 1000px;" class="main">
-		<%@ include file="./SingInMain.jsp"%>
-	</section>
-	<script src="../js/jquery-3.3.1.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
+<body style="padding-top: 70px;">
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<%@ include file="/JavaServerPage/Topbar.jsp"%>
+	</nav>
+	<div class="container">
+		<div class="main">
+			<%@ include file="./SingInMain.jsp"%>
+		</div>
+	</div>
+	<script src="./js/jquery-3.3.1.min.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
 </body>
+
 </html>

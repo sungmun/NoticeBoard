@@ -11,15 +11,20 @@
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <style type="text/css">
 section.main {
-	height: 100%;
-	margin: 0 auto;
+	padding: 40px 15px;
+	text-align: center;
 }
 </style>
 </head>
 <body class="modal-body">
-	<section style="width: 1000px;" class="main">
-		<%@ include file="./NoticeContentMain.jsp"%>
-	</section>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<%@ include file="/JavaServerPage/Topbar.jsp"%>
+	</nav>
+	<div class="container">
+		<div class="main">
+			<%@ include file="./NoticeContentMain.jsp"%>
+		</div>
+	</div>
 	<script src="../js/jquery-3.3.1.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 </body>
