@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,16 +16,15 @@ import database.User.UserDAO;
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/Login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/SingUp")
+public class SingUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginServlet() {
+	public SingUpServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -39,21 +39,32 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		UserDAO dao=null;
-		HttpSession session=request.getSession();
-		
+		UserDAO dao = null;
+		HttpSession session = request.getSession();
+
 		request.setCharacterEncoding("UTF-8");
+
+		String id = request.getParameter("id");
+		String password = request.getParameter("password");
 		
-		String id=request.getParameter("id");
-		String password=request.getParameter("password");
-		
+		if(!pageload(id, password, request, response)) {
+			return;
+		}
 		try {
-			dao=UserDAO.createUserDAO();
-			User user=dao.selectUser(id, password);
+			dao = UserDAO.createUserDAO();
+			User user = dao.selectUser(id, password);
 			session.setAttribute("login", user);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public boolean pageload(String id, String password,HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		if (!(id == null || password == null)) {
+			return true;
+		}
+		RequestDispatcher rd=request.getRequestDispatcher("/JavaServerPage/SingUps.jsp");
+		rd.forward(request, response);
+		return false;
 	}
 }
