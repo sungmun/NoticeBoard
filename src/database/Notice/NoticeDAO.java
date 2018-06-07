@@ -85,7 +85,7 @@ public class NoticeDAO extends DataAcessObject {
 
 		Notice notice = null;
 		try {
-			stmt = con.prepareStatement(SQL+";");
+			stmt = con.prepareStatement(SQL);
 
 			ResultSet rs = stmt.executeQuery();
 			rs.next();

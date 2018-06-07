@@ -24,7 +24,6 @@ public class SinginServlet extends HttpServlet {
      */
     public SinginServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
