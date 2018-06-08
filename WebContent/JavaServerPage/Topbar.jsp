@@ -10,36 +10,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <style>
-.member {
-	text-align: right;
-}
-
 .member button {
 	margin: 10px;
 }
 </style>
 </head>
 <body>
-	<div class="info">
-		<div class="member">
-			<%
-				User user = (User) session.getAttribute("login");
-				if (user == null) {
-			%>
-			<button class="login btn-group-vertical btn" onclick="signIn()">sign
-				in</button>
-			<button class="sing_up btn-group-vertical btn">sign up</button>
-			<%
-				} else {
-			%>
-			<label>ID : <%=user.getId()%></label>
-			<button class="sing_up btn-group-vertical btn">MyPage</button>
-			<%}%>
+	<div class="container">
+
+		<div class="member collapse navbar-collapse">
+			<div class="navbar-right member">
+				<%
+					User user = (User) session.getAttribute("login");
+					if (user == null) {
+				%>
+				<button class="login btn btn-group"
+					onclick="location.href = '${pageContext.request.contextPath}/JavaServerPage/SingIns.jsp'">sign
+					in</button>
+				<button class="sing_up btn btn-group"
+					onclick="location.href = '${pageContext.request.contextPath}/JavaServerPage/SingUps.jsp'">sign
+					up</button>
+				<%
+					} else {
+				%>
+				<label>ID : <%=user.getId()%></label>
+				<button class="sing_up btn-group-vertical btn">MyPage</button>
+				<%
+					}
+				%>
+			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
 		function signIn() {
-			location.href = './JavaServerPage/SingIns.jsp'
+
 		}
 	</script>
 	<script src="../js/jquery-3.3.1.min.js"></script>
