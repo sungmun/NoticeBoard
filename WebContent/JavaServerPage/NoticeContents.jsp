@@ -16,7 +16,7 @@ section.main {
 }
 </style>
 </head>
-<body class="modal-body">
+<body style="padding-top: 70px;">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<%@ include file="/JavaServerPage/Topbar.jsp"%>
 	</nav>

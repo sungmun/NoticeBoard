@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,14 +10,11 @@
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 </head>
 <body style="padding-top: 70px;">
-
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<%@ include file="/JavaServerPage/Topbar.jsp"%>
 	</nav>
 	<div class="container">
-		<div class="main">
-			<%@ include file="/JavaServerPage/NoticeList.jsp"%>
-		</div>
+		<%@ include file="/JavaServerPage/NoticeList.jsp"%>
 	</div>
 	<script src="./js/jquery-3.3.1.min.js"></script>
 	<script src="./js/bootstrap.min.js"></script>
