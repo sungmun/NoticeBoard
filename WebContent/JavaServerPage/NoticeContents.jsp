@@ -17,7 +17,7 @@ section.main {
 </style>
 </head>
 <body style="padding-top: 70px;">
-	<nav class="navbar navbar-inverse navbar-fixed-top">
+	<nav class="navbar navbar-inverse navbar-fixed-top" id="navbar" onmouseover="navbarOpen(this)" onmouseout="scrollFunction()">
 		<%@ include file="/JavaServerPage/Topbar.jsp"%>
 	</nav>
 	<div class="container">
