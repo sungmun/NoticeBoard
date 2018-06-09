@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import database.User.UserDAO;
 import database.User.User;
+import database.User.UserDAO;
 
 /**
  * Servlet implementation class SinginServlet

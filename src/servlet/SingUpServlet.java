@@ -1,8 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,32 +39,40 @@ public class SingUpServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+
+
 		UserDAO dao = null;
 		HttpSession session = request.getSession();
 
-		request.setCharacterEncoding("UTF-8");
 
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
-		
-		if(!pageload(id, password, request, response)) {
+
+		if (!pageload(id, password, request, response)) {
 			return;
 		}
 		try {
+
 			dao = UserDAO.createUserDAO();
 			User user = dao.selectUser(id, password);
+			if(user==null) {
+				response.sendRedirect("./JavaServerPage/SingUps.jsp");
+				return;
+			}
 			session.setAttribute("login", user);
+			response.sendRedirect("./index.jsp");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public boolean pageload(String id, String password,HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		if (!(id == null || password == null)) {
+	public boolean pageload(String id, String password, HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		if (id != null && password != null) {
 			return true;
 		}
-		RequestDispatcher rd=request.getRequestDispatcher("/JavaServerPage/SingUps.jsp");
-		rd.forward(request, response);
+		response.sendRedirect("./JavaServerPage/SingUps.jsp");
 		return false;
 	}
 }
