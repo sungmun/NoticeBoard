@@ -2,51 +2,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
 <style>
 .member button {
 	margin: 10px;
 }
-</style>
-</head>
-<body>
-	<div class="container">
 
-		<div class="member collapse navbar-collapse">
-			<div class="navbar-right member">
-				<%
-					User user = (User) session.getAttribute("login");
-					if (user == null) {
-				%>
-				<button class="login btn btn-group"
-					onclick="location.href = '${pageContext.request.contextPath}/JavaServerPage/SingIns.jsp'">sign
-					in</button>
-				<button class="sing_up btn btn-group"
-					onclick="location.href = '${pageContext.request.contextPath}/JavaServerPage/SingUps.jsp'">sign
-					up</button>
-				<%
-					} else {
-				%>
-				<label>ID : <%=user.getId()%></label>
-				<button class="sing_up btn-group-vertical btn">MyPage</button>
-				<%
-					}
-				%>
-			</div>
+#navbar {
+	transition: top 2s;
+}
+#navbar:hover {
+	top:0;
+}
+</style>
+<div class="container">
+
+	<div class="member collapse navbar-collapse" >
+		<div class="navbar-header">
+			<a class="navbar-brand"
+				href="${pageContext.request.contextPath}/index.jsp">NoticeBorad</a>
+		</div>
+		<div class="navbar-right member">
+			<%
+				User user = (User) session.getAttribute("login");
+				if (user == null) {
+			%>
+			<button class="login btn btn-group"
+				onclick="location.href = '${pageContext.request.contextPath}/JavaServerPage/SingIns.jsp'">sign
+				in</button>
+			<button class="sing_up btn btn-group"
+				onclick="location.href = '${pageContext.request.contextPath}/JavaServerPage/SingUps.jsp'">sign
+				up</button>
+			<%
+				} else {
+			%>
+			<label class="id"><%=user.getId()%></label>
+			<button class="sing_up btn-group-vertical btn">MyPage</button>
+			<%
+				}
+			%>
 		</div>
 	</div>
-	<script type="text/javascript">
-		function signIn() {
+</div>
+<script type="text/javascript">
+	function navbarOpen(bar) {
+		bar.style.top="0";
+	}
+	
+	window.addEventListener('scroll', function() {
+		scrollFunction();
+	});
 
+	function scrollFunction() {
+		if (document.body.scrollTop > 20
+				|| document.documentElement.scrollTop > 20) {
+			
+			document.getElementById("navbar").style.top = "-45px";
+		} else {
+			document.getElementById("navbar").style.top = "0";
 		}
-	</script>
-	<script src="../js/jquery-3.3.1.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
-</body>
-</html>
+	}
+</script>
