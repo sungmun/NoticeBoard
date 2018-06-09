@@ -4,12 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 
 <style type="text/css">
 textarea.form-control {
 	height: 100;
@@ -79,6 +74,7 @@ div.section {
 	box-shadow: inset 0 1px 1px white, 0 0 8px white;
 }
 </style>
+ -->
 </head>
 <body>
 	<%
@@ -89,36 +85,37 @@ div.section {
 		NoticeDAO DAO = NoticeDAO.createNoticeDAO();
 		Notice notice = DAO.getNotice(Integer.parseInt("1"));
 	%>
-	<div class="panel section">
+	<div class="col-sm-10 section">
 		<header>
-			<div class="panel-title">
-				<h2><%=notice.getNotice_title()%></h2>
-			</div>
-			<div id="title_attribute" class="panel-heading">
-				<div class="member_id author_id"><%=notice.getMember_id()%></div>
-				<div class="notice_date"><%=notice.getNotice_date()%></div>
-			</div>
+			<h2 class="post_title"><%=notice.getNotice_title()%></h2>
+			<p class="post-meta" style="color: #999;"><%=notice.getNotice_date()%>
+				<a href="#"><%=notice.getMember_id()%></a>
+			</p>
 		</header>
-		<section class="panel-body panel-default "><%=notice.getNotice_contents()%></section>
+		<hr>
+		<p class="panel-body panel-default "><%=notice.getNotice_contents()%></p>
+		<hr>
 	</div>
-	<div class="panel section comment">
-		<div id="title_attribute" class="panel-heading">
-			<div class="member_id">tjdans174</div>
-		</div>
-		<div class="comment_ajax">
-			<textarea name="comment" id="comment" cols="30" rows="10"
-				class="panel-body panel-default form-control"></textarea>
-			<input type="button" value="comment" class="btn btn-default">
+	<div class="panel section comment col-sm-10">
+		<div class="form-group">
+			<label class="sr-only">comment</label>
+			<div class="input-group">
+				<textarea name="comment" class="custom-control form-control comment"
+					placeholder="comment" row="3" style = "resize : none"></textarea>
+				<span class="input-group-addon btn btn-primary">Send
+				<!-- <button type="button" class="btn btn-default">comment</button> -->
+				</span>
+			</div>
 		</div>
 	</div>
 
-	<div class="panel section">
-		<div id="title_attribute" class="panel-heading">
-			<div class="member_id author_id">tjdans174</div>
-			<div class="notice_date">2017-01-01</div>
+	<div class="panel section col-sm-10">
+		<div id="title_attribute" class="post-meta text-right">
+			<p>
+				2017-01-01 <a href="#">tjdans174</a>
+			</p>
 		</div>
 		<section class="panel-body panel-default ">댓글이 들어갈 공간입니다</section>
 	</div>
-
 </body>
 </html>
