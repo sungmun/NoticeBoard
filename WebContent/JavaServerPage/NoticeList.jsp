@@ -28,7 +28,7 @@
 			for (Notice e : list) {
 		%>
 		<tr class="notice_list"
-			onclick="location.href = '${pageContext.request.contextPath}/JavaServerPage/NoticeContents.jsp?id='+this.cells[0].innerHTML">
+			onclick="location.href = '${pageContext.request.contextPath}/JavaServerPage/NoticeContentPage.jsp?id='+this.cells[0].innerHTML">
 			<td><%=e.getNotice_num() + 1%></td>
 			<td><%=e.getNotice_title()%></td>
 			<td><%=e.getMember_id()%></td>

@@ -27,10 +27,10 @@
 				if (user == null) {
 			%>
 			<button class="login btn btn-group"
-				onclick="location.href = '${pageContext.request.contextPath}/JavaServerPage/SingIns.jsp'">sign
+				onclick="location.href = '${pageContext.request.contextPath}/JavaServerPage/SingInPage.jsp'">sign
 				in</button>
 			<button class="sing_up btn btn-group"
-				onclick="location.href = '${pageContext.request.contextPath}/JavaServerPage/SingUps.jsp'">sign
+				onclick="location.href = '${pageContext.request.contextPath}/JavaServerPage/SingUpPage.jsp'">sign
 				up</button>
 			<%
 				} else {
