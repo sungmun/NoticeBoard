@@ -4,12 +4,11 @@
 	<h1>회원가입</h1>
 </div>
 <div class="col-md-6 col-md-offset-3">
-	<form role="form" action="${pageContext.request.contextPath}/SingUp"
-		method="post">
+	<form role="form" action="${pageContext.request.contextPath}/Singin" method="post">
 		<div class="form-group">
-			<label for="InputEmail">ID</label>
+			<label for="id">ID</label>
 			<div class="input-group">
-				<input type="email" class="form-control" id="id" placeholder="ID">
+				<input type="text" class="form-control" name="id" placeholder="ID">
 				<span class="input-group-btn">
 					<button class="btn btn-success">중복확인</button>
 				</span>
@@ -17,7 +16,7 @@
 		</div>
 		<div class="form-group">
 			<label for="InputPassword1">비밀번호</label> <input type="password"
-				class="form-control" id="InputPassword1" placeholder="비밀번호">
+				class="form-control" name="password" placeholder="비밀번호">
 		</div>
 		<div class="form-group">
 			<label for="InputPassword2">비밀번호 확인</label> <input type="password"
@@ -28,22 +27,22 @@
 			<label for="username">이름</label>
 			<div class="row">
 				<div class="col-md-6">
-					<input type="text" class="form-control" id="username"
+					<input type="text" class="form-control" name="firstname"
 						placeholder="FirstName">
 				</div>
 				<div class="col-md-6">
-					<input type="text" class="form-control" id="username"
+					<input type="text" class="form-control" name="secondname"
 						placeholder="SecondName">
 				</div>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="InputEmail">이메일 주소</label> <input type="email"
-				class="form-control" id="InputEmail" placeholder="이메일 주소">
+				class="form-control" name="email" placeholder="이메일 주소">
 		</div>
 		<div class="form-group">
 			<label for="username">휴대폰 번호</label> <input type="tel"
-				class="form-control" id="username" placeholder="- 없이 입력해 주세요">
+				class="form-control" name="phone" placeholder="- 없이 입력해 주세요">
 			<span class="input-group-btn"> </span>
 		</div>
 		<div class="form-group text-center">

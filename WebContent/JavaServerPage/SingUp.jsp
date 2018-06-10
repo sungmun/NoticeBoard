@@ -14,8 +14,8 @@
 			<form id="login-form"
 				action="${pageContext.request.contextPath}/SingUp" method="post">
 				<div>
-					<input type="text" class="form-control" name="username"
-						placeholder="Username" autofocus>
+					<input type="text" class="form-control" name="id"
+						placeholder="ID" autofocus>
 				</div>
 				<div>
 					<input type="password" class="form-control" name="password"
