@@ -15,7 +15,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="InputPassword1">비밀번호</label> <input type="password"
+			<label for="password">password</label> <input type="password"
 				class="form-control" name="password" placeholder="비밀번호">
 		</div>
 		<div class="form-group">
@@ -37,11 +37,11 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="InputEmail">이메일 주소</label> <input type="email"
+			<label for="email">이메일 주소</label> <input type="email"
 				class="form-control" name="email" placeholder="이메일 주소">
 		</div>
 		<div class="form-group">
-			<label for="username">휴대폰 번호</label> <input type="tel"
+			<label for="phone">휴대폰 번호</label> <input type="tel"
 				class="form-control" name="phone" placeholder="- 없이 입력해 주세요">
 			<span class="input-group-btn"> </span>
 		</div>
