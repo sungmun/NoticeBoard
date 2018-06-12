@@ -39,7 +39,7 @@
 		%>
 	</tbody>
 </table>
-<a href="#" class="pull-right btn btn-default write">글쓰기</a>
+<a href="${pageContext.request.contextPath}/JavaServerPage/WritePage.jsp" class="pull-right btn btn-default write">글쓰기</a>
 <div class="alert-link text-center">
 	<a href="#" onclick="">1</a>
 </div>

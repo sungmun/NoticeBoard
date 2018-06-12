@@ -9,7 +9,7 @@
             </textarea>
 	</div>
 	<div class="pull-right">
-		<button type="submit" class="btn btn-default">완료</button>
+		<button type="submit" class="btn btn-default">Sucess</button>
 	</div>
 
 </form>
