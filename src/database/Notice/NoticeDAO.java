@@ -2,12 +2,13 @@ package database.Notice;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import database.DataAcessObject;
 
 public class NoticeDAO extends DataAcessObject {
-	public static NoticeDAO InstanseNoticDAO;
+	private static NoticeDAO InstanseNoticDAO;
 
 	protected NoticeDAO() throws ClassNotFoundException {
 		super();
@@ -104,5 +105,29 @@ public class NoticeDAO extends DataAcessObject {
 			System.err.println("=======================================");
 		}
 		return notice;
+	}
+	public boolean insertNotice(Notice notice) {
+		String SQL="INSERT INTO Notice(notice_title, member_id) VALUE(?, ?)";
+		try {
+			stmt=con.prepareStatement(SQL,Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, notice.getNotice_title());
+			stmt.setString(2, notice.getMember_id());
+			
+			stmt.executeUpdate();
+			
+			int pk=-1;
+			ResultSet rs=stmt.getGeneratedKeys();
+			if(rs.next()) {
+				pk=rs.getInt(1);
+			}
+			SQL="INSERT INTO NoticeContents VALUE(?, ?)";
+			stmt=con.prepareStatement(SQL);
+			stmt.setInt(1, pk);
+			stmt.setString(2, notice.getNotice_contents());
+			return stmt.execute();
+		}catch (SQLException e) {
+			
+		}
+		return false;
 	}
 }
