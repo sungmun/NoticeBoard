@@ -12,6 +12,11 @@
 <script src="../js/bootstrap.min.js"></script>
 </head>
 <body style="padding-top: 70px;">
+<%
+	if(request.getSession().getAttribute("login")==null){
+		response.sendRedirect("/JavaServerPage/SingUp.jsp");
+	}
+%>
 	<nav class="navbar navbar-inverse navbar-fixed-top" id="navbar" onmouseover="navbarOpen(this)" onmouseout="scrollFunction()">
 		<%@ include file="/JavaServerPage/Topbar.jsp"%>
 	</nav>
