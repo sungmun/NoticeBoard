@@ -32,7 +32,7 @@ public class NoticeDAO extends DataAcessObject {
 			stmt = con.prepareStatement(SQL);
 			stmt.setInt(1, limit * (page - 1));
 			stmt.setInt(2, limit * page);
-			
+
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				Notice notice = new Notice();
@@ -44,11 +44,7 @@ public class NoticeDAO extends DataAcessObject {
 				array.add(notice);
 			}
 		} catch (SQLException e) {
-			System.err.println("=======================================");
-			System.err.println("NoticeDAO.getNoticeList()");
-			System.err.println(e.getMessage());
-			System.err.println(SQL);
-			System.err.println("=======================================");
+			errMessageprint(e, "NoticeDAO.getNoticeList()");
 		}
 
 		return array;
@@ -63,26 +59,17 @@ public class NoticeDAO extends DataAcessObject {
 				return rs.getInt("cnt");
 			}
 		} catch (SQLException e) {
-			System.err.println("=======================================");
-			System.err.println("NoticeDAO.getNoticCount()");
-			System.err.println(SQL);
-			System.err.println("=======================================");
+			errMessageprint(e, "NoticeDAO.getNoticeCount()");
 		}
 		return -1;
 	}
 
 	public Notice getNotice(int index_num) {
 
-		final String SQL = "SELECT Notice.notice_num, "
-				+ "Notice.notice_title,"
-				+ "Notice.member_id,"
-				+ "NoticeContents.notice_contents,"
-				+ "Notice.notice_date,"
-				+ "Notice.notice_count "
-				+ "FROM Notice "
-				+ "JOIN NoticeContents "
-				+ "ON Notice.notice_num=NoticeContents.notice_num "
-				+ "WHERE Notice.notice_num = "+index_num;
+		final String SQL = "SELECT Notice.notice_num, " + "Notice.notice_title," + "Notice.member_id,"
+				+ "NoticeContents.notice_contents," + "Notice.notice_date," + "Notice.notice_count " + "FROM Notice "
+				+ "JOIN NoticeContents " + "ON Notice.notice_num=NoticeContents.notice_num "
+				+ "WHERE Notice.notice_num = " + index_num;
 
 		Notice notice = null;
 		try {
@@ -98,36 +85,43 @@ public class NoticeDAO extends DataAcessObject {
 			notice.setNotice_count(rs.getInt("notice_count"));
 			notice.setNotice_num(rs.getInt("notice_num"));
 		} catch (SQLException e) {
-			System.err.println("=======================================");
-			System.err.println("NoticeDAO.getNotice()");
-			System.err.println(SQL);
-			System.err.println(e.getErrorCode());
-			System.err.println("=======================================");
+			errMessageprint(e, "NoticeDAO.getNotice()");
 		}
 		return notice;
 	}
+
 	public boolean insertNotice(Notice notice) {
-		String SQL="INSERT INTO Notice(notice_title, member_id) VALUE(?, ?)";
+		String SQL = "INSERT INTO Notice(notice_title, member_id) VALUE(?, ?)";
 		try {
-			stmt=con.prepareStatement(SQL,Statement.RETURN_GENERATED_KEYS);
+			stmt = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, notice.getNotice_title());
 			stmt.setString(2, notice.getMember_id());
-			
+
 			stmt.executeUpdate();
-			
-			int pk=-1;
-			ResultSet rs=stmt.getGeneratedKeys();
-			if(rs.next()) {
-				pk=rs.getInt(1);
+
+			int pk = -1;
+			ResultSet rs = stmt.getGeneratedKeys();
+			if (rs.next()) {
+				pk = rs.getInt(1);
 			}
-			SQL="INSERT INTO NoticeContents VALUE(?, ?)";
-			stmt=con.prepareStatement(SQL);
+			SQL = "INSERT INTO NoticeContents VALUE(?, ?)";
+			stmt = con.prepareStatement(SQL);
 			stmt.setInt(1, pk);
 			stmt.setString(2, notice.getNotice_contents());
 			return stmt.execute();
-		}catch (SQLException e) {
-			
+		} catch (SQLException e) {
+			errMessageprint(e, "NoticeDAO.insertNotice(" + notice + ")");
 		}
 		return false;
+	}
+
+	public void errMessageprint(Exception e, String callMethod) {
+		System.err.println("=======================================");
+		System.err.println(callMethod);
+		System.err.println(e.getMessage());
+		if (e instanceof SQLException) {
+			System.err.println(((SQLException) e).getSQLState());
+		}
+		System.err.println("=======================================");
 	}
 }
