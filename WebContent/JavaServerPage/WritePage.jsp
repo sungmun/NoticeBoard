@@ -14,7 +14,7 @@
 <body style="padding-top: 70px;">
 <%
 	if(request.getSession().getAttribute("login")==null){
-		response.sendRedirect("/JavaServerPage/SingUp.jsp");
+		response.sendRedirect("./SingUpPage.jsp");
 	}
 %>
 	<nav class="navbar navbar-inverse navbar-fixed-top" id="navbar" onmouseover="navbarOpen(this)" onmouseout="scrollFunction()">
