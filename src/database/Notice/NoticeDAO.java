@@ -39,8 +39,8 @@ public class NoticeDAO extends DataAcessObject {
 				notice.setMember_id(rs.getString("Member_id"));
 				notice.setNotice_title(rs.getString("notice_title"));
 				notice.setNotice_date(rs.getDate("notice_date"));
-				notice.setNotice_num(rs.getInt("notice_count"));
-				notice.setNotice_count(rs.getInt("notice_num"));
+				notice.setNotice_num(rs.getInt("notice_num"));
+				notice.setNotice_count(rs.getInt("notice_count"));
 				array.add(notice);
 			}
 		} catch (SQLException e) {
@@ -97,7 +97,7 @@ public class NoticeDAO extends DataAcessObject {
 			stmt.setString(1, notice.getNotice_title());
 			stmt.setString(2, notice.getMember_id());
 
-			stmt.executeUpdate();
+			stmt.execute();
 
 			int pk = -1;
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -108,7 +108,8 @@ public class NoticeDAO extends DataAcessObject {
 			stmt = con.prepareStatement(SQL);
 			stmt.setInt(1, pk);
 			stmt.setString(2, notice.getNotice_contents());
-			return stmt.execute();
+			stmt.execute();
+			return true;
 		} catch (SQLException e) {
 			errMessageprint(e, "NoticeDAO.insertNotice(" + notice + ")");
 		}
