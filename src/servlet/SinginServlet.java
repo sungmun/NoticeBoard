@@ -54,7 +54,7 @@ public class SinginServlet extends HttpServlet {
 			if (dao.insertUser(user)) {
 				response.sendRedirect("./index.jsp");
 			} else {
-				response.sendRedirect("./JavaServerPage/SingIns.jsp");
+				response.sendRedirect("./JavaServerPage/SingInPage.jsp");
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

@@ -56,7 +56,7 @@ public class SingUpServlet extends HttpServlet {
 			dao = UserDAO.createUserDAO();
 			User user = dao.selectUser(id, password);
 			if(user==null) {
-				response.sendRedirect("./JavaServerPage/SingUps.jsp");
+				response.sendRedirect("./JavaServerPage/SingUpPage.jsp");
 				return;
 			}
 			session.setAttribute("login", user);
