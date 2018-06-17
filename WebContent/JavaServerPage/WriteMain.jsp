@@ -1,4 +1,4 @@
-<form action=""${pageContext.request.contextPath}/Write" method="post" class="for">
+<form action="${pageContext.request.contextPath}/Write" method="post" class="for">
 	<div class="form-group">
 		<label for="title">Title</label> <input type="text" name="title"
 			id="title" class="form-control">
