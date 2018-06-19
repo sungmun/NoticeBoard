@@ -25,13 +25,12 @@ public class NoticeDAO extends DataAcessObject {
 
 	public ArrayList<Notice> getNoticeList(int page) {
 		final int limit = 20;
-		final String SQL = "SELECT * FROM Notice LIMIT ?, ?";
-
+		final String SQL = "SELECT * FROM Notice ORDER BY notice_num desc LIMIT ?, 20";
+		
 		ArrayList<Notice> array = new ArrayList<>();
 		try {
 			stmt = con.prepareStatement(SQL);
 			stmt.setInt(1, limit * (page - 1));
-			stmt.setInt(2, limit * page);
 
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
