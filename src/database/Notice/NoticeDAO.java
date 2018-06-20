@@ -24,8 +24,10 @@ public class NoticeDAO extends DataAcessObject {
 	}
 
 	public ArrayList<Notice> getNoticeList(int page) {
+		return getNoticeList("SELECT * FROM Notice ORDER BY notice_num desc LIMIT ?, 20",page);
+	}
+	public ArrayList<Notice> getNoticeList(final String SQL, int page) {
 		final int limit = 20;
-		final String SQL = "SELECT * FROM Notice ORDER BY notice_num desc LIMIT ?, 20";
 		
 		ArrayList<Notice> array = new ArrayList<>();
 		try {
@@ -48,9 +50,8 @@ public class NoticeDAO extends DataAcessObject {
 
 		return array;
 	}
-
-	public int getNoticCount() {
-		final String SQL = "SELECT COUNT(*) as cnt FROM Notice";
+	
+	public int getNoticCount(final String SQL) {
 		try {
 			stmt = con.prepareStatement(SQL);
 			ResultSet rs = stmt.executeQuery();
@@ -62,7 +63,9 @@ public class NoticeDAO extends DataAcessObject {
 		}
 		return -1;
 	}
-
+	public int getNoticCount() {
+		return getNoticCount("SELECT COUNT(*) as cnt FROM Notice");
+	}
 	public Notice getNotice(int index_num) {
 
 		final String SQL = "SELECT Notice.notice_num, " + "Notice.notice_title," + "Notice.member_id,"
