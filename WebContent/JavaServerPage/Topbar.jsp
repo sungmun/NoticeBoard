@@ -35,8 +35,8 @@
 			<%
 				} else {
 			%>
-			<label class="id"><%=user.getId()%></label>
-			<button class="sing_up btn-group-vertical btn">MyPage</button>
+			<label class="id" style="color:white"><%=user.getId()%></label>
+			<a class="sing_up btn btn-group-vertical" href="${pageContext.request.contextPath}/JavaServerPage/MyPage.jsp">MyPage</a>
 			<%
 				}
 			%>
