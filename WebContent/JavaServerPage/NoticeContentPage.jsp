@@ -44,7 +44,7 @@
 					<div class="input-group">
 						<textarea name="comment"
 							class="custom-control form-control comment" placeholder="comment"
-							row="3" style="resize: none"></textarea>
+							 style="resize: none"></textarea>
 						<span class="input-group-addon btn btn-primary">Send <!-- <button type="button" class="btn btn-default">comment</button> -->
 						</span>
 					</div>

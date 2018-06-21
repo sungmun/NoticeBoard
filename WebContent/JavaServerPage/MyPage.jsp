@@ -10,6 +10,8 @@
 <title>NoticeBoard</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 </head>
 <body style="padding-top: 70px;">
 	<nav class="navbar navbar-inverse navbar-fixed-top" id="navbar"
@@ -31,32 +33,41 @@
 				<form>
 					<div class="form-group">
 						<label for="id">ID</label> <input type="text" class="form-control"
-							disabled="disabled" value=<%=users.getId() %>>
+							disabled="disabled" value=<%=users.getId()%>>
 					</div>
 					<div class="form-group">
-						<label for="password">Password</label> <input type="text" class="form-control"
-							disabled="disabled" name="password" id="password">
+						<label for="password">Password</label> <input type="text"
+							class="form-control" disabled="disabled" name="password"
+							id="password">
+					</div>
+					<div class="form-group">
+						<label for="password2">Password</label> <input type="text"
+							class="form-control" id="password2">
 					</div>
 					<div class="form-group">
 						<label for="username">이름</label>
 						<div class="row">
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="firstname"
-									placeholder="FirstName" disabled="disabled" value=<%=users.getFirstname() %>>
+									placeholder="FirstName" disabled="disabled"
+									value=<%=users.getFirstname()%>>
 							</div>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="secondname"
-									placeholder="SecondName" disabled="disabled" value=<%=users.getSecondname() %>>
+									placeholder="SecondName" disabled="disabled"
+									value=<%=users.getSecondname()%>>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="email">이메일 주소</label> <input type="email"
-							class="form-control" placeholder="이메일 주소" value=<%=users.getEmail() %>>
+							class="form-control" placeholder="이메일 주소"
+							value=<%=users.getEmail()%>>
 					</div>
 					<div class="form-group">
 						<label for="phone">휴대폰 번호</label> <input type="tel"
-							class="form-control" placeholder="- 없이 입력해 주세요" value=<%=users.getPhone() %>> <span
+							class="form-control" placeholder="- 없이 입력해 주세요"
+							value=<%=users.getPhone()%>> <span
 							class="input-group-btn"> </span>
 					</div>
 					<%
@@ -74,7 +85,17 @@
 			</div>
 		</div>
 	</div>
-	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	function passwordCheck() {
+		if(form.InputPassword==""||form.InputPassword2==""){
+			return false;
+		}
+		if (form.InputPassword2 == form.InputPassword) {
+			return true;
+		}
+		$('#passwordModal').modal();
+		return false;
+	}
+	</script>
 </body>
 </html>
