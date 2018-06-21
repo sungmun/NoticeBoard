@@ -39,14 +39,13 @@ public class SinginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String id=request.getParameter("id");
-		String password=request.getParameter("password");
-		String firstname=request.getParameter("firstname");
-		String secondname=request.getParameter("secondname");
-		String phone=request.getParameter("phone");
-		String email=request.getParameter("email");
-
-		User user = new User(id, password, firstname, secondname, phone, email);
+		User user=new User();
+		user.setId(request.getParameter("id"));
+		user.setPassword(request.getParameter("password"));
+		user.setFirstname(request.getParameter("firstname"));
+		user.setSecondname(request.getParameter("secondname"));
+		user.setPhone(request.getParameter("phone"));
+		user.setEmail(request.getParameter("email"));
 		UserDAO dao;
 		try {
 			dao = UserDAO.createUserDAO();

@@ -12,32 +12,6 @@ public class User {
 	private String image;
 	private Date joindate;
 
-	public User(String id, String password, String firstname, String secondname, String phone, String email,
-			String image, Date joindate) {
-		this.id = id;
-		this.password = password;
-		this.firstname = firstname;
-		this.secondname = secondname;
-		this.phone = phone;
-		this.email = email;
-		this.image = image;
-		this.joindate = joindate;
-	}
-
-	public User(String id, String password, String firstname, String secondname, String phone, String email,
-			String image) {
-		this(id, password, firstname, secondname, phone, email, image, null);
-	}
-
-	public User(String id, String password, String firstname, String secondname, String phone, String email,
-			Date joindate) {
-		this(id, password, firstname, secondname, phone, email, null, joindate);
-	}
-
-	public User(String id, String password, String firstname, String secondname, String phone, String email) {
-		this(id, password, firstname, secondname, phone, email, null,null);
-	}
-
 	public String getId() {
 		return id;
 	}

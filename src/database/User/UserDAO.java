@@ -17,7 +17,27 @@ public class UserDAO extends DataAcessObject {
 		InstanseUserDAO = (InstanseUserDAO == null) ? new UserDAO() : InstanseUserDAO;
 		return InstanseUserDAO;
 	}
-
+	public User searchUser(String id) {
+		final String SQL = "Select * from User where user_id = ?";
+		try {
+			stmt = con.prepareStatement(SQL);
+			stmt.setString(1, id);
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+			User user=new User();
+			user.setId(rs.getString("user_id"));
+			user.setFirstname(rs.getString("user_firstname"));
+			user.setSecondname(rs.getString("user_secondname"));
+			user.setPhone(rs.getString("user_phone"));
+			user.setEmail(rs.getString("user_email"));
+			user.setImage(rs.getString("user_image"));
+			user.setJoindate(rs.getDate("joindate"));
+			return user;
+		} catch (SQLException e) {
+			errMessageprint(e, "UserDAO.selectUser(" + id + ")");
+		}
+		return null;
+	}
 	public User selectUser(String id, String password) {
 		final String SQL = "Select * from User where user_id = ? AND user_password = ?";
 		try {
@@ -26,16 +46,16 @@ public class UserDAO extends DataAcessObject {
 			stmt.setString(2, password);
 			ResultSet rs = stmt.executeQuery();
 			rs.next();
-			String userId = rs.getString("user_id");
-			String userPassword = rs.getString("user_password");
-			String userFirstname = rs.getString("user_firstname");
-			String userSecondname = rs.getString("user_secondname");
-			String userPhone = rs.getString("user_phone");
-			String userEmail = rs.getString("user_email");
-			String userImage = rs.getString("user_image");
-			Date userJoindate = rs.getDate("joindate");
-			return new User(userId, userPassword, userFirstname, userSecondname, userPhone, userEmail, userImage,
-					userJoindate);
+			User user=new User();
+			user.setId(rs.getString("user_id"));
+			user.setPassword(rs.getString("user_password"));
+			user.setFirstname(rs.getString("user_firstname"));
+			user.setSecondname(rs.getString("user_secondname"));
+			user.setPhone(rs.getString("user_phone"));
+			user.setEmail(rs.getString("user_email"));
+			user.setImage(rs.getString("user_image"));
+			user.setJoindate(rs.getDate("joindate"));
+			return user;
 		} catch (SQLException e) {
 			errMessageprint(e, "UserDAO.selectUser(" + id + "," + password + ")");
 		}
