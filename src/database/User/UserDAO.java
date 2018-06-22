@@ -61,7 +61,23 @@ public class UserDAO extends DataAcessObject {
 		}
 		return null;
 	}
+	public boolean updateUser(User user) {
+		String SQL = "UPDATE User SET user_password = ?, user_phone = ? , user_email = ?) where user_id = ? ";
 
+		try {
+			stmt = con.prepareStatement(SQL);
+			stmt.setString(1, user.getPassword());
+			stmt.setString(2, user.getPhone());
+			stmt.setString(3, user.getEmail());
+			stmt.setString(4, user.getId());
+			stmt.execute();
+			
+			return true;
+		} catch (SQLException e) {
+			errMessageprint(e, "UserDAO.insertUser("+user+")");
+		}
+		return false;
+	}
 	public boolean insertUser(User user) {
 		final String SQL = "INSERT INTO User (user_id,user_password,user_firstname,user_secondname,user_phone,user_email) VALUES (?,?,?,?,?,?)";
 
