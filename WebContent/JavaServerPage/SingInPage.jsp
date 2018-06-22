@@ -10,6 +10,8 @@
 <title>NoticeBoard</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 </head>
 <body style="padding-top: 70px;">
 
@@ -23,19 +25,21 @@
 				<h1>회원가입</h1>
 			</div>
 			<div class="col-md-6 col-md-offset-3">
-				<form>
+				<form role="form" action="${pageContent.request.contextPath}/Singin"
+					onsubmit="return passwordCheck();" method="post" name="form">
 					<div class="form-group">
 						<label for="id">ID</label>
 						<div class="input-group">
 							<input type="text" class="form-control" name="id"
 								placeholder="ID"> <span class="input-group-btn">
-								<button class="btn btn-success">중복확인</button>
+								<button class="btn btn-success" id="idOverlapCheck">중복확인</button>
 							</span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="password">password</label> <input type="password"
-							class="form-control" name="password" placeholder="비밀번호">
+							id="password" class="form-control" name="password"
+							placeholder="비밀번호">
 					</div>
 					<div class="form-group">
 						<label for="InputPassword2">비밀번호 확인</label> <input type="password"
@@ -73,8 +77,36 @@
 			</div>
 		</div>
 	</div>
-	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel" aria-hidden="true"
+		id="passwordModal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h4 class="modal-title">
+						<font style="vertical-align: inherit;">경고</font></a>
+					</h4>
+				</div>
+				<div class="modal-body">
+					<font style="vertical-align: inherit;"><font
+						style="vertical-align: inherit;"> 비밀번호가 같지 않습니다.<br>
+							다시 확인해 주세요
+					</font></font>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function passwordCheck() {
+			if (form.InputPassword2 == form.InputPassword) {
+				return true;
+			}
+			$('#passwordModal').modal();
+			return false;
+		}
+	</script>
 </body>
 
 </html>

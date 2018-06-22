@@ -85,6 +85,26 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel" aria-hidden="true"
+		id="passwordModal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h4 class="modal-title">
+						<font style="vertical-align: inherit;">경고</font></a>
+					</h4>
+				</div>
+				<div class="modal-body">
+					<font style="vertical-align: inherit;"><font
+						style="vertical-align: inherit;"> 비밀번호가 같지 않거나 비밀번호를 입력하지 않으셨습니다<br>
+							다시 확인해 주세요
+					</font></font>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript">
 	function passwordCheck() {
 		if(form.InputPassword==""||form.InputPassword2==""){
