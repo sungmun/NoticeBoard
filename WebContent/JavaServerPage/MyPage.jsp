@@ -30,7 +30,7 @@
 				<h1>개인 정보</h1>
 			</div>
 			<div class="col-md-6 col-md-offset-3">
-				<form>
+				<form method="post" onsubmit="return passwordCheck();" name="form" role="form" action="${pageContent.request.contextPath}/UpdateUser">
 					<div class="form-group">
 						<label for="id">ID</label> <input type="text" class="form-control"
 							disabled="disabled" value=<%=users.getId()%>>
