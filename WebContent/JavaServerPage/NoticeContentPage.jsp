@@ -36,7 +36,19 @@
 				</header>
 				<hr>
 				<p class="panel-body panel-default "><%=notice.getNotice_contents()%></p>
+				
+			</div>
+			
+			
+			<div class="panel section col-sm-10">
+				<h3 class="">Comment</h3>
 				<hr>
+				<div id="title_attribute" class="post-meta text-right">
+					<p>
+						2017-01-01 <a href="#">tjdans174</a>
+					</p>
+				</div>
+				<section class="panel-body panel-default ">댓글이 들어갈 공간입니다</section>
 			</div>
 			<div class="panel section comment col-sm-10">
 				<div class="form-group">
@@ -49,15 +61,6 @@
 						</span>
 					</div>
 				</div>
-			</div>
-
-			<div class="panel section col-sm-10">
-				<div id="title_attribute" class="post-meta text-right">
-					<p>
-						2017-01-01 <a href="#">tjdans174</a>
-					</p>
-				</div>
-				<section class="panel-body panel-default ">댓글이 들어갈 공간입니다</section>
 			</div>
 		</div>
 	</div>
