@@ -1,7 +1,5 @@
 package database.Comment;
 
-import java.lang.reflect.Field;
-
 public class Comment {
 	/*
 	 * CREATE TABLE Comment( notice_num INT(12) unsigned NOT NULL, member_id

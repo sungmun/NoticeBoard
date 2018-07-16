@@ -34,12 +34,37 @@ public class WriteCommentServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		readComment(request, response);
+		int post = Integer.parseInt(request.getParameter("post"));
+		String commentContents = request.getParameter("contents");
+		String memberId = request.getParameter("memberid");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter write = response.getWriter();
+
+		if(commentContents==null) {
+			readComment(write, post);
+			return;
+		}
+		
+		if (commentContents == "") {
+			errorMessageJs(write, "댓글이 없습니다. 댓글을 입력해 주세요");
+			return;
+		} else if (memberId == null) {
+			errorMessageJs(write, "로그인을 하고 댓글을 달아 주세요");
+			return;
+		}
+		
+		readComment(write, post);
 	}
 
+	public void errorMessageJs(PrintWriter write, String message) {
+		write.append("<script type=\"text/javascript\">");
+		write.append("alert(\"");
+		write.append(message);
+		write.append("\");");
+		write.append("</script>");
+	}
 
-	public void readComment(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int post = Integer.parseInt(request.getParameter("post"));
+	public void readComment(PrintWriter write, int post) throws IOException {
 		ArrayList<Comment> list = null;
 		try {
 			CommentDAO dao = CommentDAO.createCommentDAO();
@@ -50,8 +75,6 @@ public class WriteCommentServlet extends HttpServlet {
 		if (list == null) {
 			return;
 		}
-		response.setCharacterEncoding("UTF-8");
-		PrintWriter write = response.getWriter();
 		for (Comment comment : list) {
 			write.append("<div class=\"post-meta\">");
 			write.append("<div class=\"pull-left\">");
