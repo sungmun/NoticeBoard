@@ -5,3 +5,5 @@ CREATE TABLE Comment(
     FOREIGN KEY (member_id) REFERENCES User (user_id) ON DELETE RESTRICT,
     FOREIGN KEY (notice_num) REFERENCES Notice (notice_num) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+ALTER TABLE Comment ADD comment_day DATETIME;
