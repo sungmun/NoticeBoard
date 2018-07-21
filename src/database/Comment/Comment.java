@@ -7,10 +7,22 @@ public class Comment {
 	 * (member_id) REFERENCES User (user_id) ON DELETE RESTRICT, FOREIGN KEY
 	 * (notice_num) REFERENCES Notice (notice_num) ON DELETE CASCADE ON UPDATE
 	 * CASCADE );
+	 * ALTER TABLE Comment ADD comment_day DATETIME;
 	 */
 	private int noticeNum;
 	private String memberId;
 	private String commentContents;
+	private String commentDay;
+	
+	
+	
+	public String getCommentDay() {
+		return commentDay;
+	}
+
+	public void setCommentDay(String commentDay) {
+		this.commentDay = commentDay;
+	}
 
 	public int getNoticeNum() {
 		return noticeNum;
