@@ -20,7 +20,7 @@ public class CommentDAO extends DataAcessObject {
 	}
 
 	public ArrayList<Comment> getCommentList(final int post) {
-		String SQL = "SELECT notice_num,member_id,comment_day FROM Comment WHERE notice_num=? order by comment_day";
+		String SQL = "SELECT * FROM Comment WHERE notice_num=? order by comment_day";
 		
 		ArrayList<Comment> array = new ArrayList<>();
 		try {

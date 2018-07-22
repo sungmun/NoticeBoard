@@ -7,3 +7,5 @@ CREATE TABLE Comment(
 );
 
 ALTER TABLE Comment ADD comment_day DATETIME;
+
+CREATE TRIGGER TodayInsertComment BEFORE INSERT ON Comment FOR EACH ROW SET NEW.comment_day = NOW() ;
