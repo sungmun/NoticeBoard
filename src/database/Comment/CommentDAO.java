@@ -1,6 +1,5 @@
 package database.Comment;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -41,14 +40,13 @@ public class CommentDAO extends DataAcessObject {
 		return array;
 	}
 	public boolean insertComment(final Comment comment) {
-		String SQL = "INSERT INTO Comment(notice_num,member_id,comment_day,comment_contents) VALUES(?,?,?,?)";
+		String SQL = "INSERT INTO Comment(notice_num,member_id,comment_contents) VALUES(?,?,?)";
 		
 		try {
 			stmt = con.prepareStatement(SQL);
 			stmt.setInt(1, comment.getNoticeNum());
 			stmt.setString(2, comment.getMemberId());
-			stmt.setDate(3, Date.valueOf(comment.getCommentDay()));
-			stmt.setString(4, comment.getCommentContents());
+			stmt.setString(3, comment.getCommentContents());
 
 			stmt.executeUpdate();
 			return true;

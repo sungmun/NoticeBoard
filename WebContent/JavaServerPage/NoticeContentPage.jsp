@@ -53,10 +53,10 @@
 				<div class="form-group">
 					<label class="sr-only">comment</label>
 					<div class="input-group">
-						<textarea name="comment"
+						<textarea name="comment" id="comment-area"
 							class="custom-control form-control comment" placeholder="comment"
 							style="resize: none"></textarea>
-						<span class="input-group-addon btn btn-primary">Send <!-- <button type="button" class="btn btn-default">comment</button> -->
+						<span class="input-group-addon btn btn-primary" id="send">Send <!-- <button type="button" class="btn btn-default">comment</button> -->
 						</span>
 					</div>
 				</div>
@@ -65,10 +65,28 @@
 	</div>
 	<script type="text/javascript">
 	window.onload=commentLoad(<%=id%>);
-	function commentLoad(postNum) {
+	
+	$("#send").click(function() {
 		$.ajax({
 			type:"POST",
 			url: "/NoticeBoard/WriteComment",
+			data: {
+				"post":<%=id%>,
+				"contents":$("#comment-area").val()
+				},
+			dataType: "html",
+			fail: ()=>console.log('post['+postNum+'] error'),
+			success: (data)=>{
+				$('#comment').html(data);
+			}
+		});
+		commentLoad(<%=id%>);
+	});
+	
+	function commentLoad(postNum) {
+		$.ajax({
+			type:"POST",
+			url: "/NoticeBoard/ReadComment",
 			data: {"post":postNum},
 			dataType: "html",
 			fail: ()=>console.log('post['+postNum+'] error'),

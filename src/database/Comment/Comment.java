@@ -57,7 +57,7 @@ public class Comment {
 		
 		json+=", \"memberId\" : "+memberId;
 		json+=", \"commentContents\" : "+commentContents;
-		
+		json+=", \"commentDay\" : "+commentDay;
 		json+="}";
 		return json;
 	}
