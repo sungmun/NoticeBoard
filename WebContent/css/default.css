@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.member button {
+	margin: 10px;
+}
+
+#navbar {
+	transition: top 2s;
+}
+
+#navbar:hover {
+	top: 0;
+}
