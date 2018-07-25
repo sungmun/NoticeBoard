@@ -1,8 +1,13 @@
 package database.Notice;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Notice {
+public class Notice implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2360776885033821029L;
 	private int notice_num;
 	private String notice_title;
 	private String member_id;
