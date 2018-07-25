@@ -1,6 +1,12 @@
 package database.Comment;
 
-public class Comment {
+import java.io.Serializable;
+
+public class Comment implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9179312563896349898L;
 	/*
 	 * CREATE TABLE Comment( notice_num INT(12) unsigned NOT NULL, member_id
 	 * VARCHAR(20) NOT NULL, comment_contents VARCHAR(255) NOT NULL, FOREIGN KEY
@@ -13,7 +19,6 @@ public class Comment {
 	private String memberId;
 	private String commentContents;
 	private String commentDay;
-	
 	
 	
 	public String getCommentDay() {
@@ -46,19 +51,5 @@ public class Comment {
 
 	public void setCommentContents(String commentContents) {
 		this.commentContents = commentContents;
-	}
-
-	@Override
-	public String toString() {
-		String json=null;
-		json+="{";
-		
-		json+="\"noticeNum\" : "+noticeNum;
-		
-		json+=", \"memberId\" : "+memberId;
-		json+=", \"commentContents\" : "+commentContents;
-		json+=", \"commentDay\" : "+commentDay;
-		json+="}";
-		return json;
 	}
 }
