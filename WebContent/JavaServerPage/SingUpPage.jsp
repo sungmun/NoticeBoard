@@ -3,24 +3,9 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NoticeBoard</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
-<style type="text/css">
-#login-form>div {
-	margin: 15px 0;
-}
-</style>
-</head>
+<%@include file="/head.jsp"%>
 <body style="padding-top: 70px;">
-	<nav class="navbar navbar-inverse navbar-fixed-top" id="navbar"
-		onmouseover="navbarOpen(this)" onmouseout="scrollFunction()">
-		<%@ include file="/JavaServerPage/Topbar.jsp"%>
-	</nav>
+	<%@ include file="/JavaServerPage/Topbar.jsp"%>
 	<div class="container">
 		<div class="main">
 			<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
