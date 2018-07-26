@@ -9,7 +9,7 @@
 			<div class="member collapse navbar-collapse">
 				<div class="navbar-header">
 					<a class="navbar-brand"
-						href="${pageContext.request.contextPath}/index.jsp">NoticeBorad</a>
+						href="${pageContext.request.contextPath}/index">NoticeBorad</a>
 				</div>
 				<div class="navbar-right member">
 					<%
