@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -42,6 +43,7 @@ public class ListLoadServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		String pageNum = request.getParameter("page");
 		if (request.getParameter("search") != null) {
 			searchListLoad(request, response);
@@ -55,13 +57,14 @@ public class ListLoadServlet extends HttpServlet {
 		try {
 			DAO = NoticeDAO.createNoticeDAO();
 
-			final int noticeCount;
-			ArrayList<Notice> list = DAO.getNoticeList(1);
-			noticeCount = DAO.getNoticCount();
-			int MAX_PAGE = noticeCount / 20 + (noticeCount % 20 > 0 ? 1 : 0);
-
-			response.getWriter().println(new Gson().toJson(list.toArray(new Notice[list.size()])));
-			response.getWriter().println(new Gson().toJson(MAX_PAGE));
+			
+			ArrayList<Notice> list = DAO.getNoticeList(Integer.parseInt(pageNum));
+			
+			
+			PrintWriter write=response.getWriter();
+			
+			write.println(new Gson().toJson(list.toArray(new Notice[list.size()])));
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
