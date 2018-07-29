@@ -20,13 +20,13 @@
 			%>
 			<div class="col-sm-10 section">
 				<header>
-					<h2 class="post_title"><%=notice.getNotice_title()%></h2>
-					<p class="post-meta" style="color: #999;"><%=notice.getNotice_date()%>
-						<a href="#"><%=notice.getMember_id()%></a>
+					<h2 class="post_title"><jsp:getProperty name="notice" property="Notice_title"></h2>
+					<p class="post-meta" style="color: #999;"><jsp:getProperty name="notice" property="notice_date">
+						<a href="#"><jsp:getProperty name="notice" property="member_id"></a>
 					</p>
 				</header>
 				<hr>
-				<p class="panel-body panel-default "><%=notice.getNotice_contents()%></p>
+				<p class="panel-body panel-default "><jsp:getProperty name="notice" property="notice_contents"></p>
 
 			</div>
 
@@ -65,9 +65,7 @@
 				},
 			dataType: "html",
 			fail: ()=>console.log('post['+postNum+'] error'),
-			success: (data)=>{
-				$('#comment').html(data);
-			}
+			success: (data)=>$('#comment').html(data)
 		});
 		commentLoad(<%=id%>);
 	});
@@ -75,13 +73,11 @@
 	function commentLoad(postNum) {
 		$.ajax({
 			type:"POST",
-			url: "/NoticeBoard/ReadComment",
+			url: "/ListLoad/ReadComment",
 			data: {"post":postNum},
 			dataType: "html",
 			fail: ()=>console.log('post['+postNum+'] error'),
-			success: (data)=>{
-				$('#comment').html(data);
-			}
+			success: (data)=>$('#comment').html(data)
 		});
 	}
 	</script>
