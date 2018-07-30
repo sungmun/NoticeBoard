@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import database.Notice.Notice;
 import database.Notice.NoticeDAO;
@@ -57,13 +58,11 @@ public class ListLoadServlet extends HttpServlet {
 		try {
 			DAO = NoticeDAO.createNoticeDAO();
 
-			
 			ArrayList<Notice> list = DAO.getNoticeList(Integer.parseInt(pageNum));
 			
-			
-			PrintWriter write=response.getWriter();
-			
-			write.println(new Gson().toJson(list.toArray(new Notice[list.size()])));
+			JsonObject json=new JsonObject();
+			json.addProperty("list", new Gson().toJson(list.toArray(new Notice[list.size()])));
+			response.getWriter().println(json.toString());
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -80,10 +79,18 @@ public class ListLoadServlet extends HttpServlet {
 			DAO = NoticeDAO.createNoticeDAO();
 			ArrayList<Notice> list = DAO.getNoticeList("SELECT * FROM Notice WHERE notice_title Like \"%" + search
 					+ "%\" ORDER BY notice_num desc LIMIT ?, 20", pageNum);
-			final int noticeCount = DAO.getNoticCount();
+			final int noticeCount = DAO.getNoticCount("SELECT COUNT(*) as cnt FROM Notice WHERE notice_title Like \"%" + search
+					+ "%\"");
 			int MAX_PAGE = noticeCount / 20 + (noticeCount % 20 > 0 ? 1 : 0);
-			response.getWriter().println(new Gson().toJson(list.toArray(new Notice[list.size()])));
-			response.getWriter().println(new Gson().toJson(MAX_PAGE));
+			JsonObject json=new JsonObject();
+			json.addProperty("list", new Gson().toJson(list.toArray(new Notice[list.size()])));
+			json.addProperty("maxPage", MAX_PAGE);
+//			Gson json=new Gson();
+//			json.fromJson("list", json.)
+			
+			response.getWriter().println(json.toString());
+			
+//			response.getWriter().println(new Gson().toJson(MAX_PAGE));
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
