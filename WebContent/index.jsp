@@ -9,13 +9,13 @@
 	<%@ include file="/JavaServerPage/Topbar.jsp"%>
 
 	<div class="container">
-		<form class="form-inline pull-right" style="padding-bottom: 10px">
+		<form class="form-inline pull-right" style="padding-bottom: 10px" method="post">
 			<div class="form-group">
 				<label for="search" class="sr-only">search</label> <input
 					type="text" class="form-control input-group" id="search"
 					placeholder="title" name="search">
 			</div>
-			<button class="btn btn-default" id="serchbtn" type="submit">검색</button>
+			<button class="btn btn-default" id="serchbtn" type="button">검색</button>
 		</form>
 
 		<table class="table table-bordered table-striped table-hover">
@@ -61,7 +61,11 @@
 	<script type="text/javascript">
 	var maxPage;
 	window.onload = () => {maxPage="${maxPage}"};
-	$()
+	$('#serchbtn').click(function(){
+
+		
+		listLoad(1,$('#search').val());
+	});
 	
 	function pageChange(i) {
 		var minNum=(i-4<=0)?1:i-4;
@@ -96,11 +100,11 @@
 	}
 	function listChange(json){
 		var list=JSON.parse(JSON.stringify(json));
-		list=list.responseJSON;
+		list=JSON.parse(list.responseJSON.list);
 
 		var listlen=list.length;
 		var contentStr='';
-		
+
 		for(var i=0;i<listlen;i++){
 			
 			contentStr+='<tr class="notice_list" onclick="location.href = "NoticeBoard/JavaServerPage/NoticeContentPage.jsp?id='+list[i].notice_num+'">';
