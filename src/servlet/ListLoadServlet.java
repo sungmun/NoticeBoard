@@ -42,15 +42,20 @@ public class ListLoadServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	public boolean isNull(String str) {
+		return (str == null || str == "") ? false : true;
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		String pageNum = request.getParameter("page");
-		if (request.getParameter("search") != null) {
+
+		if (isNull(request.getParameter("search"))) {
 			searchListLoad(request, response);
 			return;
 		}
-		if (pageNum == null) {
+		if (!isNull(pageNum)) {
 			firstListLoad(request, response);
 			return;
 		}
