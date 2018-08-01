@@ -17,7 +17,7 @@ public class DataAcessObject {
 			con = DriverManager.getConnection(PrivateData.dataBaseUrl, PrivateData.dataBaseId, PrivateData.dataBasePassword);
 		} catch(SQLException e) {
 			System.err.println("=============================");
-			System.err.println("SQL Error");
+			System.err.println("Connection Error");
 			System.err.println("=============================");
 		}
 	}
