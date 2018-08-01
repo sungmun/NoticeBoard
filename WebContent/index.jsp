@@ -9,7 +9,8 @@
 	<%@ include file="/JavaServerPage/Topbar.jsp"%>
 
 	<div class="container">
-		<form class="form-inline pull-right" style="padding-bottom: 10px" method="post">
+		<form class="form-inline pull-right" style="padding-bottom: 10px"
+			method="post">
 			<div class="form-group">
 				<label for="search" class="sr-only">search</label> <input
 					type="text" class="form-control input-group" id="search"
@@ -46,47 +47,52 @@
 			class="pull-right btn btn-default write">글쓰기</a>
 		<div class="alert-link text-center">
 			<ul class="pagination justify-content-center">
-				<li class="page-item  active"><a class="page-link" role="button"
-					onclick="pageChange(1);"> <c:out value="1"></c:out>
+				<li class="page-item  active"><a class="page-link"
+					role="button" onclick="pageChange(1);"> <c:out value="1"></c:out>
 				</a></li>
 				<c:forEach var='i' begin='2' end='10' step='1'>
 
-					<li class="page-item"><a class="page-link" role="button"
-						onclick="pageChange(${i});"> <c:out value="${i}"></c:out>
-					</a></li>
+					<li class="page-item"><a class="page-link" role="button"><c:out value="${i}"></c:out></a></li>
 				</c:forEach>
 			</ul>
 		</div>
 	</div>
 	<script type="text/javascript">
+	
+	var search='';
+	var page=1;
 	var maxPage;
 	window.onload = () => {maxPage="${maxPage}"};
-	$('#serchbtn').click(function(){
-
+	$('#serchbtn').on('click',function(){
+		search=$('#search').val();
 		
-		listLoad(1,$('#search').val());
+		listLoad(1,search);
 	});
-	
-	function pageChange(i) {
-		var minNum=(i-4<=0)?1:i-4;
+	$('.page-link').on('click',function(){
+		var page=$(event.target).html();
+		maxPageLoad(page);
+		
+		listLoad(page);
+	});
+	$(document).on('click','.page-link',function(){
+		var page=$(event.target).html();
+		maxPageLoad(page);
+		
+		listLoad(page);
+	});
+	function maxPageLoad(page) {
+		var minNum=(page-4<=0)?1:page-4;
 		var maxNum=(minNum+9>=maxPage)?maxPage:minNum+9;
 		var contentStr='';
 
 		for(var num=minNum;num<=maxNum;num++){
-			var classVal='page-item';
-			if(num == i){
-				classVal+=' active';			
-			}
-			contentStr+='<li class="'+classVal+'">'
-			contentStr+='<a class="page-link" role="button" onclick="pageChange(\''+num+'\')">'
-			contentStr+=num;
-			contentStr+='</a></li>';
+			contentStr+='<li class="page-item'+(((num == page)?' active':''))+'">'
+			contentStr+='<a class="page-link" role="button">'+num+'</a></li>';
 		}
 		$('.pagination').html(contentStr);
-		listLoad(i);
 	}
-	function listLoad(number,search) {
-		var num={"page":number, "search":search};
+	function listLoad(number) {
+		var num={"page":number.trim(), "search":search};
 		$.ajax({
 			url: "/NoticeBoard/ListLoad",
 			data:num,
@@ -94,13 +100,16 @@
 			dataType: "JSON",
 			fail: ()=>console.log('post['+number+'] error'),
 			complete : function(data){
-				listChange(data);
+				
+				data=JSON.parse(JSON.stringify(data)).responseJSON;
+				maxPage=(data.maxPage==null)?maxPage:data.maxPage;
+				listChange(JSON.parse(data.list));
 			}
 		});
 	}
-	function listChange(json){
-		var list=JSON.parse(JSON.stringify(json));
-		list=JSON.parse(list.responseJSON.list);
+	function listChange(list){
+		//var list=JSON.parse(JSON.stringify(json));
+		//list=JSON.parse(list);
 
 		var listlen=list.length;
 		var contentStr='';
