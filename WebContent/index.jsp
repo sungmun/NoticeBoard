@@ -63,68 +63,78 @@
 	var page=1;
 	var maxPage;
 	window.onload = () => {maxPage="${maxPage}"};
-	$('#serchbtn').on('click',function(){
+	
+	
+	$(document).on('click','#serchbtn',function(){
 		search=$('#search').val();
 		
-		listLoad(1,search);
+		listLoad(1);
 	});
-	$('.page-link').on('click',function(){
-		var page=$(event.target).html();
-		maxPageLoad(page);
-		
-		listLoad(page);
-	});
+	
 	$(document).on('click','.page-link',function(){
 		var page=$(event.target).html();
 		maxPageLoad(page);
-		
 		listLoad(page);
+		
 	});
+	
+	$(document).on('click','tbody>tr',function(){
+		var num=$(event.target).find('td').first()
+		location.href='/NoticeBoard/JavaServerPage/NoticeContentPage.jsp?id='+num;
+	});
+	
+	function listChange(list){
+		
+		$('tbody>tr').remove();
+		$.each(list,function(index,item){
+		
+			var tr=$('<tr/>',{class: 'notice_list'});
+			
+			tr.append($('<td/>',{text: item.notice_num}));
+			tr.append($('<td/>',{text: item.notice_title}));
+			tr.append($('<td/>',{text: item.member_id}));
+			tr.append($('<td/>',{text: item.notice_date}));
+			
+			$("tbody").append(tr);
+		});
+		
+	}
+	
 	function maxPageLoad(page) {
 		var minNum=(page-4<=0)?1:page-4;
 		var maxNum=(minNum+9>=maxPage)?maxPage:minNum+9;
-		var contentStr='';
-
+		
+		$('li.page-item').remove();
+		
 		for(var num=minNum;num<=maxNum;num++){
-			contentStr+='<li class="page-item'+(((num == page)?' active':''))+'">'
-			contentStr+='<a class="page-link" role="button">'+num+'</a></li>';
+			
+			var li=$('<li/>',{class:'page-item'+(num == page)?'active':''});
+			
+			li.append($('<a/>',{
+				class:'page-link',
+				role:'button',
+				text:num
+				}));
+			$('.pagination').append(li);
 		}
-		$('.pagination').html(contentStr);
+		
 	}
+	
 	function listLoad(number) {
 		var num={"page":number.trim(), "search":search};
 		$.ajax({
 			url: "/NoticeBoard/ListLoad",
 			data:num,
 			method :"POST",
-			dataType: "JSON",
+			dataType: "json",
 			fail: ()=>console.log('post['+number+'] error'),
-			complete : function(data){
-				
-				data=JSON.parse(JSON.stringify(data)).responseJSON;
+			success : function(data){
 				maxPage=(data.maxPage==null)?maxPage:data.maxPage;
 				listChange(JSON.parse(data.list));
 			}
 		});
 	}
-	function listChange(list){
-		//var list=JSON.parse(JSON.stringify(json));
-		//list=JSON.parse(list);
-
-		var listlen=list.length;
-		var contentStr='';
-
-		for(var i=0;i<listlen;i++){
-			
-			contentStr+='<tr class="notice_list" onclick="location.href = "NoticeBoard/JavaServerPage/NoticeContentPage.jsp?id='+list[i].notice_num+'">';
-			contentStr+='<td>'+list[i].notice_num+'</td>';
-			contentStr+='<td>'+list[i].notice_title+'</td>';
-			contentStr+='<td>'+list[i].member_id+'</td>';
-			contentStr+='<td>'+list[i].notice_date+'</td></tr>';
-			
-		}
-		$("tbody").html(contentStr);
-	}
+	
 	
 	</script>
 </body>
