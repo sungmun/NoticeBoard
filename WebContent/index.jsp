@@ -79,8 +79,8 @@
 	
 	$(document).on('click','tbody>tr',function(item){
 		var num=$(this).find('td').first().text();
+		location.href='./NoticeContent?id='+num;
 		
-		location.href='/NoticeBoard/JavaServerPage/NoticeContentPage.jsp?id='+num;
 	});
 	
 	function listChange(list){
