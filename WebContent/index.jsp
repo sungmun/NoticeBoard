@@ -31,8 +31,7 @@
 			<tbody>
 				<c:forEach var="list" items="${noticeList}">
 
-					<tr class="notice_list"
-						onclick="location.href = '${pageContext.request.contextPath}/JavaServerPage/NoticeContentPage.jsp?id=${list.notice_num}'">
+					<tr class="notice_list">
 						<td><c:out value="${list.notice_num}"></c:out></td>
 						<td><c:out value="${list.notice_title}"></c:out></td>
 						<td><c:out value="${list.member_id}"></c:out></td>
@@ -72,14 +71,15 @@
 	});
 	
 	$(document).on('click','.page-link',function(){
-		var page=$(event.target).html();
+		var page=$(this).text();
 		maxPageLoad(page);
 		listLoad(page);
 		
 	});
 	
-	$(document).on('click','tbody>tr',function(){
-		var num=$(event.target).find('td').first()
+	$(document).on('click','tbody>tr',function(item){
+		var num=$(this).find('td').first().text();
+		
 		location.href='/NoticeBoard/JavaServerPage/NoticeContentPage.jsp?id='+num;
 	});
 	
@@ -108,8 +108,9 @@
 		
 		for(var num=minNum;num<=maxNum;num++){
 			
-			var li=$('<li/>',{class:'page-item'+(num == page)?'active':''});
-			
+			var li=$('<li/>');
+			li.addClass('page-item');
+			if(num == page)	li.addClass('active');
 			li.append($('<a/>',{
 				class:'page-link',
 				role:'button',
