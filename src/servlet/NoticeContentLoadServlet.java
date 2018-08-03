@@ -37,7 +37,7 @@ public class NoticeContentLoadServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		String id=request.getParameter("id");
-		if(id==null)id="1";
+		
 		NoticeDAO DAO;
 		try {
 			DAO = NoticeDAO.createNoticeDAO();

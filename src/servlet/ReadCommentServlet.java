@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import database.Comment.Comment;
 import database.Comment.CommentDAO;
 
@@ -45,25 +48,12 @@ public class ReadCommentServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter write= response.getWriter();
 		
-		if (list == null) {
-			return;
-		}
-		for (Comment comment : list) {
-			write.append("<div class=\"post-meta\">");
-			write.append("<div class=\"pull-left\">");
-			write.append("<a href=\"#\">");
-			write.append(comment.getMemberId());
-			write.append("</a>");
-			write.append("</div>");
-			write.append("<div class=\"pull-right\">");
-			write.append(comment.getCommentDay());
-			write.append("</div>");
-			write.append("</div>");
-			write.append("<br>");
-			write.append("<section class=\"panel-body panel-default\">");
-			write.append(comment.getCommentContents());
-			write.append("</section>");
-		}
+		Comment[] arraylist=list.toArray(new Comment[list.size()]);
+		
+		JsonObject json=new JsonObject();
+		json.addProperty("list", new Gson().toJson(arraylist));
+		
+		write.println(json);
 	}
 	
 
