@@ -45,7 +45,6 @@ public class WriteCommentServlet extends HttpServlet {
 			comment.setMemberId(user.getId());
 			comment.setNoticeNum(post);
 			
-			System.err.println(comment.toString());
 			CommentDAO dao;
 			try {
 				dao = CommentDAO.createCommentDAO();

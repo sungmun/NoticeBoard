@@ -27,7 +27,9 @@
 			<div class="panel section col-sm-10">
 				<h3 class="">Comment</h3>
 				<hr>
-				<div id="comment"></div>
+				<div id="comment">
+					<div></div>
+				</div>
 			</div>
 			<div class="panel section comment col-sm-10">
 				<div class="form-group">
@@ -45,9 +47,15 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	window.onload=commentLoad('${notice.notice_num}');
-	
+	var postNum='';
+	window.onload=function(){
+		postNum='${notice.notice_num}';
+		
+		commentLoad();
+	}
 	$("#send").click(function() {
+		$.post('/NoticeBoard/WriteComment',{data: {post:'${notice.notice_num}',contents:$('#comment-area').val()}});
+		/*
 		$.ajax({
 			type:"POST",
 			url: "/NoticeBoard/WriteComment",
@@ -55,21 +63,57 @@
 				"post":'${notice.notice_num}',
 				"contents":$("#comment-area").val()
 				},
-			dataType: "html",
+			dataType: "json",
 			fail: ()=>console.log('post['+postNum+'] error'),
-			success: (data)=>$('#comment').html(data)
-		});
+			
+		});*/
 		commentLoad('${notice.notice_num}');
 	});
+	function commentWrite(list){
+		$('#comment>div').remove();
+		$.each(list,function(index,comment){
+			var total=$('<div/>');
+			
+			var post_meat=$('<div/>',{class:'post-meta'});
+			
+			var memberid=$('<div/>',{class:'pull-left'});
+			
+			memberid.append($('<a/>',{
+				href:'#',
+				text: comment.memberId
+			}));
+			post_meat.append(memberid);
+			
+			var commentday=$('<div/>',{
+				class:'pull-right',
+				text: comment.commentDay
+			});
+			post_meat.append(commentday);
+			
+			total.append(post_meat);
+			total.append($('<br/>'));
+			
+			var commentContent=$('<section/>',{
+				class: 'panel-body panel-default',
+				text: comment.commentContents
+			});
+			
+			total.append(commentContent);
+			
+			$('#comment').append(total);
+		});
+		
+		
+	}
 	
-	function commentLoad(postNum) {
+	function commentLoad() {
 		$.ajax({
 			type:"POST",
-			url: "/ListLoad/ReadComment",
+			url: "/NoticeBoard/ReadComment",
 			data: {"post":postNum},
-			dataType: "html",
+			dataType: "json",
 			fail: ()=>console.log('post['+postNum+'] error'),
-			success: (data)=>$('#comment').html(data)
+			success: (data)=>commentWrite(JSON.parse(data.list))
 		});
 	}
 	</script>
