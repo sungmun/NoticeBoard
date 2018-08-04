@@ -128,7 +128,7 @@
 			data:num,
 			method :"POST",
 			dataType: "json",
-			fail: ()=>console.log('post['+number+'] error'),
+			fail: (date)=>console.log(date+'post['+number+'] error'),
 			success : function(data){
 				maxPage=(data.maxPage==null)?maxPage:data.maxPage;
 				listChange(JSON.parse(data.list));
