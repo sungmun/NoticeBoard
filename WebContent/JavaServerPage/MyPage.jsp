@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="database.User.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -6,12 +7,10 @@
 <%@include file="/head.jsp"%>
 <body style="padding-top: 70px;">
 	<%@ include file="/JavaServerPage/Topbar.jsp"%>
-	<%
-		User users = (User) request.getSession().getAttribute("login");
-		if (users == null) {
-			response.sendRedirect("./SingUpPage.jsp");
-		}
-	%>
+	<c:if test="${login} eq null">
+		<c:redirect url="./SingUpPage.jsp"></c:redirect>
+	</c:if>
+	
 	<div class="container">
 		<div class="main">
 			<div class="page-header">
@@ -21,7 +20,7 @@
 				<form method="post" onsubmit="return passwordCheck();" name="form" role="form" action="${pageContent.request.contextPath}/UpdateUser">
 					<div class="form-group">
 						<label for="id">ID</label> <input type="text" class="form-control"
-							disabled="disabled" value=<%=users.getId()%>>
+							disabled="disabled" value="${login.id}">
 					</div>
 					<div class="form-group">
 						<label for="password">Password</label> <input type="text"
@@ -38,37 +37,31 @@
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="firstname"
 									placeholder="FirstName" disabled="disabled"
-									value=<%=users.getFirstname()%>>
+									value="${login.firstname}">
 							</div>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="secondname"
 									placeholder="SecondName" disabled="disabled"
-									value=<%=users.getSecondname()%>>
+									value="${login.secondname}">
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="email">이메일 주소</label> <input type="email"
 							class="form-control" placeholder="이메일 주소"
-							value=<%=users.getEmail()%>>
+							value="${login.email}">
 					</div>
 					<div class="form-group">
 						<label for="phone">휴대폰 번호</label> <input type="tel"
 							class="form-control" placeholder="- 없이 입력해 주세요"
-							value=<%=users.getPhone()%>> <span
+							value="${login.phone}"> <span
 							class="input-group-btn"> </span>
 					</div>
-					<%
-						if (request.getSession().getAttribute("login") != null) {
-					%>
 					<div class="form-group text-center">
 						<button type="button" class="btn btn-info">
 							수정하기<i class="fa fa-check spaceLeft"></i>
 						</button>
 					</div>
-					<%
-						}
-					%>
 				</form>
 			</div>
 		</div>
