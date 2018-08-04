@@ -27,8 +27,6 @@ public class UserDAO extends DataAcessObject {
 			user.setId(rs.getString("user_id"));
 			user.setFirstname(rs.getString("user_firstname"));
 			user.setSecondname(rs.getString("user_secondname"));
-			user.setPhone(rs.getString("user_phone"));
-			user.setEmail(rs.getString("user_email"));
 			user.setImage(rs.getString("user_image"));
 			user.setJoindate(rs.getDate("joindate"));
 			return user;

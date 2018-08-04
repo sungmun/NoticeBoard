@@ -60,7 +60,7 @@ public class SingUpServlet extends HttpServlet {
 				return;
 			}
 			session.setAttribute("login", user);
-			response.sendRedirect("./index.jsp");
+			response.sendRedirect("./index");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
