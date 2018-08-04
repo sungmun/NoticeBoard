@@ -12,14 +12,15 @@
 				<h1>회원가입</h1>
 			</div>
 			<div class="col-md-6 col-md-offset-3">
-				<form role="form" action="${pageContent.request.contextPath}/Singin"
+				<form role="form" action="/NoticeBoard/Singin"
 					onsubmit="return passwordCheck();" method="post" name="form">
 					<div class="form-group">
 						<label for="id">ID</label>
 						<div class="input-group">
-							<input type="text" class="form-control" name="id"
+							<input type="text" class="form-control" name="id" id="id"
 								placeholder="ID"> <span class="input-group-btn">
-								<button class="btn btn-success" id="idOverlapCheck">중복확인</button>
+								<button type="button" class="btn btn-success"
+									id="idOverlapCheck">중복확인</button>
 							</span>
 						</div>
 					</div>
@@ -66,8 +67,7 @@
 	</div>
 
 	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
-		aria-labelledby="mySmallModalLabel" aria-hidden="true"
-		id="passwordModal">
+		aria-labelledby="mySmallModalLabel" aria-hidden="true" id="showModal">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 
@@ -77,21 +77,55 @@
 					</h4>
 				</div>
 				<div class="modal-body">
-					<font style="vertical-align: inherit;"><font
-						style="vertical-align: inherit;"> 비밀번호가 같지 않습니다.<br>
-							다시 확인해 주세요
-					</font></font>
+					<font style="vertical-align: inherit;"><span></span><br>
+						다시 확인해 주세요 </font>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
-		function passwordCheck() {
-			if (form.InputPassword2 == form.InputPassword) {
+	var idCheck=false;
+		$('#idOverlapCheck').click(function(){
+			$.ajax({
+				url: "/NoticeBoard/Check",
+				data : {id:$('#id').val()},
+				method:"post",
+				dataType: "json",
+				success:function(data){
+					if(data.return){
+						showModal('이미 존재하는 아이디 입니다.');
+						$('#id').val(' ');
+						$('#id').focus();
+
+						cheack=true;
+					}else{
+						showModal('존재하지 않는 아이디 입니다.');
+						$('#password').focus();
+						cheack=false;
+					}
+				}
+			});
+		});
+		function ischeckID(){
+			if(idCheck)
 				return true;
-			}
-			$('#passwordModal').modal();
+			
+			showModal('아이디 중복체크를 해주세요');
 			return false;
+		}
+		
+		function passwordCheck() {
+			if (form.InputPassword2 == form.InputPassword) 
+				return ischeckID();
+			
+			showModal('비밀번호가 같지 않습니다.');
+			return false;
+		}
+		
+		function showModal(text){
+			$('.modal-body>font>span').remove();
+			$('.modal-body>font').append($('<span/>',{text:text}));
+			$('#showModal').modal();
 		}
 	</script>
 </body>
