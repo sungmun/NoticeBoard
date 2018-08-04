@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -5,11 +6,10 @@
 <%@include file="/head.jsp"%>
 <body style="padding-top: 70px;">
 	<%@ include file="/JavaServerPage/Topbar.jsp"%>
-	<%
-		if (request.getSession().getAttribute("login") == null) {
-			response.sendRedirect("./SingUpPage.jsp");
-		}
-	%>
+	<c:if test="${login} eq null">
+		<c:redirect url="./SingUpPage.jsp"></c:redirect>
+	</c:if>
+	
 	<div class="container">
 		<form action="${pageContext.request.contextPath}/Write" method="post"
 			class="for">
