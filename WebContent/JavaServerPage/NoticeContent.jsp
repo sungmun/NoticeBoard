@@ -53,22 +53,7 @@
 		
 		commentLoad();
 	}
-	$("#send").click(function() {
-		$.post('/NoticeBoard/WriteComment',{data: {post:'${notice.notice_num}',contents:$('#comment-area').val()}});
-		/*
-		$.ajax({
-			type:"POST",
-			url: "/NoticeBoard/WriteComment",
-			data: {
-				"post":'${notice.notice_num}',
-				"contents":$("#comment-area").val()
-				},
-			dataType: "json",
-			fail: ()=>console.log('post['+postNum+'] error'),
-			
-		});*/
-		commentLoad('${notice.notice_num}');
-	});
+
 	function commentWrite(list){
 		$('#comment>div').remove();
 		$.each(list,function(index,comment){
@@ -105,6 +90,20 @@
 		
 		
 	}
+	
+	$("#send").click(function() {
+		$.ajax({
+			url: "/NoticeBoard/WriteComment",
+			type:"POST",
+			data: {
+				post:'${notice.notice_num}',
+				contents:$('#comment-area').val()
+			},
+			dataType: "json",
+			success:(data)=>alert(data.err)
+		});
+		commentLoad('${notice.notice_num}');
+	});
 	
 	function commentLoad() {
 		$.ajax({
