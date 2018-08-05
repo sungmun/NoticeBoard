@@ -13,17 +13,9 @@
 				</h4>
 			</div>
 			<div class="modal-body">
-				<font style="vertical-align: inherit;"><span></span><br>
-					다시 확인해 주세요 </font>
+				<font style="vertical-align: inherit;">
+				 </font>
 			</div>
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-function showErrorModal(text){
-	$('.modal-body>font>span').remove();
-	$('.modal-body>font').append($('<span/>',{text:text}));
-	$('#showModal').modal();
-	return false;
-}
-</script>
