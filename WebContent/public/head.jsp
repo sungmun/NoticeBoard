@@ -17,9 +17,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/CustomJS.js"></script>
-<script type="text/javascript">
-	console.log("${param.js}");
-</script>
+
 <c:forEach var="jsItem" items="${param.js}">
 	<script src="${jsItem}"></script>
 </c:forEach>
