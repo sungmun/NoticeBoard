@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<%@include file="/head.jsp"%>
-<body style="padding-top: 70px;">
-	<%@ include file="/JavaServerPage/Topbar.jsp"%>
+<head>
+<c:import url="/public/head.jsp"></c:import>
+</head>
+<body>
+	<c:import url="/public/Topbar.jsp"></c:import>
 	<div class="container">
 		<div class="main">
 			<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
