@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="/head.jsp"></c:import>
+<c:import url="/public/head.jsp"></c:import>
 </head>
-<body style="padding-top: 70px;">
-	<c:import url="/JavaServerPage/Topbar.jsp"></c:import>
+<body>
+	<c:import url="/public/Topbar.jsp"></c:import>
 	<c:if test="${login} eq null">
 		<c:redirect url="./SingUpPage.jsp"></c:redirect>
 	</c:if>
@@ -66,15 +66,9 @@
 			</div>
 		</div>
 	</div>
-	<c:import url="/JavaServerPage/ErrorMessage.jsp"></c:import>
-	<script type="text/javascript">
-		function passwordCheck() {
-			if (form.InputPassword2 == form.InputPassword) {
-				return true;
-			}
-			showModal("비밀번호가 같지 않거나 비밀번호를 입력하지 않으셨습니다");
-			return false;
-		}
-	</script>
+	<c:import url="/public/ErrorMessage.jsp"></c:import>
+	<c:import url="/public/tail.jsp">
+	<c:param name="js" value="/NoticeBoard/JavaServerPage/Mypage/js/default.js"></c:param>
+	</c:import>
 </body>
 </html>
