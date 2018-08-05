@@ -56,11 +56,11 @@ public class SingUpServlet extends HttpServlet {
 			dao = UserDAO.createUserDAO();
 			User user = dao.selectUser(id, password);
 			if(user==null) {
-				response.sendRedirect("./JavaServerPage/SingUpPage.jsp");
+				response.sendRedirect("JavaServerPage/SingUp/SingUpPage.jsp");
 				return;
 			}
 			session.setAttribute("login", user);
-			response.sendRedirect("./index");
+			response.sendRedirect("index");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -71,7 +71,7 @@ public class SingUpServlet extends HttpServlet {
 		if (id != null && password != null) {
 			return true;
 		}
-		response.sendRedirect("./JavaServerPage/SingUps.jsp");
+		response.sendRedirect("JavaServerPage/SingUp/SingUpPage.jsp");
 		return false;
 	}
 }

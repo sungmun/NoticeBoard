@@ -41,7 +41,7 @@ public class SinginServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		User user=new User();
 		user.setId(request.getParameter("id"));
-		user.setPassword(request.getParameter("password"));
+		user.setPassword(request.getParameter("password1"));
 		user.setFirstname(request.getParameter("firstname"));
 		user.setSecondname(request.getParameter("secondname"));
 		user.setPhone(request.getParameter("phone"));
@@ -51,9 +51,9 @@ public class SinginServlet extends HttpServlet {
 			dao = UserDAO.createUserDAO();
 
 			if (dao.insertUser(user)) {
-				response.sendRedirect("/NoticeBoard/index");
+				response.sendRedirect("index");
 			} else {
-				response.sendRedirect("/NoticeBoard/JavaServerPage/SingInPage.jsp");
+				response.sendRedirect("JavaServerPage/SingIn/SingInPage.jsp");
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

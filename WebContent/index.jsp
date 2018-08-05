@@ -1,17 +1,14 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="/head.jsp"></c:import>
-
+<c:import url="/public/head.jsp"></c:import>
 </head>
-<body style="padding-top: 70px;">
-
-	<%@ include file="/JavaServerPage/Topbar.jsp"%>
-	<div id="maxPage">${maxPage}</div>
+<body>
+	<c:import url="/public/Topbar.jsp"></c:import>
+	<div id="maxPage" style="display:none;">${maxPage}</div>
 	<div class="container">
 		<form class="form-inline pull-right" style="padding-bottom: 10px"
 			method="post">
@@ -61,9 +58,9 @@
 			</ul>
 		</div>
 	</div>
-	<c:import url="/tail.jsp">
+	<c:import url="/public/tail.jsp">
 		<c:param name="js"
-			value="${pageContext.request.contextPath}/js/indexJs.js"></c:param>
+			value="/NoticeBoard/js/indexJs.js"></c:param>
 	</c:import>
 </body>
 </html>

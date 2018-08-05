@@ -22,7 +22,6 @@ public class UpdateUserServlet extends HttpServlet {
      */
     public UpdateUserServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -40,9 +39,9 @@ public class UpdateUserServlet extends HttpServlet {
 			dao = UserDAO.createUserDAO();
 
 			if (dao.updateUser(user)) {
-				response.sendRedirect("./index.jsp");
+				response.sendRedirect("index.jsp");
 			} else {
-				response.sendRedirect("./JavaServerPage/MyPage.jsp");
+				response.sendRedirect("JavaServerPage/Mypage/MyPage.jsp");
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

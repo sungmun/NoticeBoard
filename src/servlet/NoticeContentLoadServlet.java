@@ -44,11 +44,10 @@ public class NoticeContentLoadServlet extends HttpServlet {
 			Notice notice = DAO.getNotice(Integer.parseInt(id));
 			request.setAttribute("notice", notice);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("JavaServerPage/NoticeContent.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("JavaServerPage/Contents/NoticeContent.jsp");
 			
 			dispatcher.forward(request, response);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

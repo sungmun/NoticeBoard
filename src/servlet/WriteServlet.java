@@ -50,7 +50,7 @@ public class WriteServlet extends HttpServlet {
 			
 			dao.insertNotice(notice);
 			
-			response.sendRedirect("./index.jsp");
+			response.sendRedirect("index.jsp");
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
