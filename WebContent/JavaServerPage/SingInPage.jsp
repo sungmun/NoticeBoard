@@ -13,7 +13,7 @@
 			</div>
 			<div class="col-md-6 col-md-offset-3">
 				<form role="form" action="/NoticeBoard/Singin"
-					onsubmit="return passwordCheck();" method="post" name="form">
+					onsubmit="return isPasswordCheck();" method="post" name="form">
 					<div class="form-group">
 						<label for="id">ID</label>
 						<div class="input-group">
@@ -25,13 +25,13 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="password">password</label> <input type="password"
-							id="password" class="form-control" name="password"
+						<label for="password1">password</label> <input type="password"
+							id="password1" class="form-control" name="password1"
 							placeholder="비밀번호">
 					</div>
 					<div class="form-group">
-						<label for="InputPassword2">비밀번호 확인</label> <input type="password"
-							class="form-control" id="InputPassword2" placeholder="비밀번호 확인">
+						<label for="password2">비밀번호 확인</label> <input type="password"
+							class="form-control" id="password2" placeholder="비밀번호 확인">
 						<p class="help-block">비밀번호 확인을 위해 다시한번 입력 해 주세요</p>
 					</div>
 					<div class="form-group">
@@ -66,66 +66,31 @@
 		</div>
 	</div>
 
-	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
-		aria-labelledby="mySmallModalLabel" aria-hidden="true" id="showModal">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
 
-				<div class="modal-header">
-					<h4 class="modal-title">
-						<font style="vertical-align: inherit;">경고</font></a>
-					</h4>
-				</div>
-				<div class="modal-body">
-					<font style="vertical-align: inherit;"><span></span><br>
-						다시 확인해 주세요 </font>
-				</div>
-			</div>
-		</div>
-	</div>
 	<script type="text/javascript">
-	var idCheck=false;
-		$('#idOverlapCheck').click(function(){
-			$.ajax({
-				url: "/NoticeBoard/Check",
-				data : {id:$('#id').val()},
-				method:"post",
-				dataType: "json",
-				success:function(data){
-					if(data.return){
-						showModal('이미 존재하는 아이디 입니다.');
-						$('#id').val(' ');
-						$('#id').focus();
-
-						cheack=true;
-					}else{
-						showModal('존재하지 않는 아이디 입니다.');
-						$('#password').focus();
-						cheack=false;
-					}
-				}
-			});
-		});
-		function ischeckID(){
-			if(idCheck)
-				return true;
-			
-			showModal('아이디 중복체크를 해주세요');
-			return false;
+		var idCheck=false;
+		
+		$('#idOverlapCheck').click(ajax("/NoticeBoard/Check",{id:$('#id').val()},isIdCheck(data)));
+		
+		function isIdCheck(data){
+			if(data.return){
+				showModal('이미 존재하는 아이디 입니다.');
+				$('#id').
+	
+				cheack=true;
+			}else{
+				showModal('존재하지 않는 아이디 입니다.');
+				$('#password').focus();
+				cheack=false;
+			}
+		}
+	
+		function isIdDuplicateCheck(){
+			return (!idCheck)?true:showModal('아이디 중복체크를 해주세요');
 		}
 		
-		function passwordCheck() {
-			if (form.InputPassword2 == form.InputPassword) 
-				return ischeckID();
-			
-			showModal('비밀번호가 같지 않습니다.');
-			return false;
-		}
-		
-		function showModal(text){
-			$('.modal-body>font>span').remove();
-			$('.modal-body>font').append($('<span/>',{text:text}));
-			$('#showModal').modal();
+		function isPasswordCheck() {
+			return (form.password2 == form.password1)?isIdDuplicateCheck():showModal('비밀번호가 같지 않습니다.');
 		}
 	</script>
 </body>
