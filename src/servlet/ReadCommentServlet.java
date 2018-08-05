@@ -28,7 +28,6 @@ public class ReadCommentServlet extends HttpServlet {
      */
     public ReadCommentServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 

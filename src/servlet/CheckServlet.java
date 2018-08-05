@@ -24,7 +24,6 @@ public class CheckServlet extends HttpServlet {
 	 */
 	public CheckServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

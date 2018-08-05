@@ -29,7 +29,6 @@ public class WriteCommentServlet extends HttpServlet {
 	 */
 	public WriteCommentServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

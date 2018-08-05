@@ -28,7 +28,6 @@ public class ListLoadServlet extends HttpServlet {
 	 */
 	public ListLoadServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -69,7 +68,6 @@ public class ListLoadServlet extends HttpServlet {
 			response.getWriter().println(json.toString());
 			
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -96,7 +94,6 @@ public class ListLoadServlet extends HttpServlet {
 			
 //			response.getWriter().println(new Gson().toJson(MAX_PAGE));
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

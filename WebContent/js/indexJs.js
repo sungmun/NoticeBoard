@@ -1,7 +1,6 @@
 
 	var search='';
 	var maxPage=$("#maxPage").text();
-	$("#maxPage").hide();
 	
 	$(document).on('click','#serchbtn',function(){
 		search=$('#search').val();
