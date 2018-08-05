@@ -5,18 +5,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="/head.jsp"></c:import>
+<c:import url="/public/head.jsp"></c:import>
 </head>
-<body style="padding-top: 70px;">
-	<c:import url="/JavaServerPage/Topbar.jsp"></c:import>
+<body>
+	<c:import url="/public/Topbar.jsp"></c:import>
 	<div class="container">
 		<div class="main">
 			<div class="page-header">
 				<h1>회원가입</h1>
 			</div>
 			<div class="col-md-6 col-md-offset-3">
-				<form role="form" action="/NoticeBoard/Singin"
-					onsubmit="return isPasswordCheck();" method="post" name="form">
+				<form role="form" action="/NoticeBoard/Singin" id="form"
+					method="post" name="form">
 					<div class="form-group">
 						<label for="id">ID</label>
 						<div class="input-group">
@@ -69,33 +69,11 @@
 		</div>
 	</div>
 
-	<c:import url="/JavaServerPage/ErrorMessage.jsp"></c:import>
-	<script type="text/javascript">
-		var idCheck=false;
-		
-		$('#idOverlapCheck').click(ajax("/NoticeBoard/Check",{id:$('#id').val()},isIdCheck(data)));
-		
-		function isIdCheck(data){
-			if(data.return){
-				showModal('이미 존재하는 아이디 입니다.');
-				$('#id').focus();
-	
-				cheack=true;
-			}else{
-				showModal('존재하지 않는 아이디 입니다.');
-				$('#password').focus();
-				cheack=false;
-			}
-		}
-	
-		function isIdDuplicateCheck(){
-			return (!idCheck)?true:showModal('아이디 중복체크를 해주세요');
-		}
-		
-		function isPasswordCheck() {
-			return (form.password2 == form.password1)?isIdDuplicateCheck():showModal('비밀번호가 같지 않습니다.');
-		}
-	</script>
+	<c:import url="/public/ErrorMessage.jsp"></c:import>
+	<c:import url="/public/tail.jsp">
+		<c:param name="js"
+			value="/NoticeBoard/JavaServerPage/SingIn/js/default.js"></c:param>
+	</c:import>
 </body>
 
 </html>
