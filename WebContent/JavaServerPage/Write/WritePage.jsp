@@ -3,13 +3,15 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<%@include file="/head.jsp"%>
-<body style="padding-top: 70px;">
-	<%@ include file="/JavaServerPage/Topbar.jsp"%>
+<head>
+<c:import url="/public/head.jsp"></c:import>
+</head>
+<body>
+	<c:import url="/public/Topbar.jsp"></c:import>
 	<c:if test="${login} eq null">
-		<c:redirect url="./SingUpPage.jsp"></c:redirect>
+		<c:redirect url="/NoticeBoard/JavaServerPage/SingUp/SingUpPage.jsp"></c:redirect>
 	</c:if>
-	
+
 	<div class="container">
 		<form action="${pageContext.request.contextPath}/Write" method="post"
 			class="for">
@@ -25,14 +27,12 @@
 			<div class="pull-right">
 				<button type="submit" class="btn btn-default">Sucess</button>
 			</div>
-
 		</form>
-
-		<script src="../ckeditor4/ckeditor.js"></script>
-		<script type="text/javascript">
-			CKEDITOR.replace('editor');
-			CKEDITOR.config.height = 600;
-		</script>
 	</div>
+	<c:import url="/public/tail.jsp">
+		<c:param name="js" value="/NoticeBoard/ckeditor4/ckeditor.js"></c:param>
+		<c:param name="js"
+			value="/NoticeBoard/JavaServerPage/Write/js/default.js"></c:param>
+	</c:import>
 </body>
 </html>
