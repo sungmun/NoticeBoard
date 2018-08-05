@@ -1,11 +1,14 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
-<%@include file="/head.jsp"%>
+<head>
+<c:import url="/head.jsp"></c:import>
+</head>
 <body style="padding-top: 70px;">
-	<%@ include file="/JavaServerPage/Topbar.jsp"%>
+	<c:import url="/JavaServerPage/Topbar.jsp"></c:import>
 	<div class="container">
 		<div class="main">
 			<div class="page-header">
@@ -66,7 +69,7 @@
 		</div>
 	</div>
 
-
+	<c:import url="/JavaServerPage/ErrorMessage.jsp"></c:import>
 	<script type="text/javascript">
 		var idCheck=false;
 		
@@ -75,7 +78,7 @@
 		function isIdCheck(data){
 			if(data.return){
 				showModal('이미 존재하는 아이디 입니다.');
-				$('#id').
+				$('#id').focus();
 	
 				cheack=true;
 			}else{
