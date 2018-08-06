@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" id="navbar" >
+<nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
 	<div class="container">
 		<div class="member collapse navbar-collapse">
 			<div class="navbar-header">
@@ -18,7 +18,7 @@
 					<c:otherwise>
 						<label class="id" style="color: white">${login.id}</label>
 						<a class="sing_up btn btn-group-vertical"
-							href="${pageContext.request.contextPath}/JavaServerPage/MyPage.jsp">MyPage</a>
+							href="/NoticeBoard/JavaServerPage/Mypage/MyPage.jsp">MyPage</a>
 					</c:otherwise>
 				</c:choose>
 
