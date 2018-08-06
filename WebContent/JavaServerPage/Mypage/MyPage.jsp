@@ -7,10 +7,10 @@
 <c:import url="/public/head.jsp"></c:import>
 </head>
 <body>
-	<c:import url="/public/Topbar.jsp"></c:import>
 	<c:if test="${login} eq null">
 		<c:redirect url="./SingUpPage.jsp"></c:redirect>
 	</c:if>
+	<c:import url="/public/Topbar.jsp"></c:import>
 	<div class="container">
 		<div class="main">
 			<div class="page-header">
@@ -25,8 +25,7 @@
 					</div>
 					<div class="form-group">
 						<label for="password">Password</label> <input type="text"
-							class="form-control" disabled="disabled" name="password"
-							id="password">
+							class="form-control" name="password1" id="password">
 					</div>
 					<div class="form-group">
 						<label for="password2">Password</label> <input type="text"
@@ -37,12 +36,12 @@
 						<div class="row">
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="firstname"
-									placeholder="FirstName" disabled="disabled"
+									placeholder="FirstName" disabled="disabled" maxlength="5"
 									value="${login.firstname}">
 							</div>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="secondname"
-									placeholder="SecondName" disabled="disabled"
+									placeholder="SecondName" disabled="disabled" maxlength="10"
 									value="${login.secondname}">
 							</div>
 						</div>
@@ -68,7 +67,8 @@
 	</div>
 	<c:import url="/public/ErrorMessage.jsp"></c:import>
 	<c:import url="/public/tail.jsp">
-	<c:param name="js" value="/NoticeBoard/JavaServerPage/Mypage/js/default.js"></c:param>
+		<c:param name="js"
+			value="/NoticeBoard/JavaServerPage/Mypage/js/default.js"></c:param>
 	</c:import>
 </body>
 </html>
