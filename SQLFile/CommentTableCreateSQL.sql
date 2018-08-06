@@ -9,3 +9,6 @@ CREATE TABLE Comment(
 ALTER TABLE Comment ADD comment_day DATETIME;
 
 CREATE TRIGGER TodayInsertComment BEFORE INSERT ON Comment FOR EACH ROW SET NEW.comment_day = NOW() ;
+
+ALTER TABLE Comment ADD comment_num INT(12) unsigned NOT NULL auto_increment PRIMARY KEY;
+ALTER TABLE Comment ADD re_comment_group INT(11) unsigned NOT NULL;
