@@ -3,6 +3,8 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,10 +38,11 @@ public class ReadCommentServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int post = Integer.parseInt(request.getParameter("post"));
-		ArrayList<Comment> list = null;
+		List<Comment> list = null;
 		try {
 			CommentDAO dao = CommentDAO.createCommentDAO();
 			list = dao.getCommentList(post);
+			
 		} catch (ClassNotFoundException e) {
 			System.err.println("error");
 		}
@@ -50,7 +53,7 @@ public class ReadCommentServlet extends HttpServlet {
 		Comment[] arraylist=list.toArray(new Comment[list.size()]);
 		
 		JsonObject json=new JsonObject();
-		json.addProperty("list", new Gson().toJson(arraylist));
+		json.addProperty("list", new Gson().toJson(list));
 		
 		write.println(json);
 	}
