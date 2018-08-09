@@ -3,6 +3,7 @@ package database.Comment;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import database.DataAcessObject;
 
@@ -18,26 +19,28 @@ public class CommentDAO extends DataAcessObject {
 		return InstanseCommentDAO;
 	}
 
-	public ArrayList<Comment> getCommentList(final int post) {
+	public LinkedList<Comment> getCommentList(final int post) {
 		String SQL = "SELECT * FROM Comment WHERE notice_num=? order by comment_day";
 		
-		ArrayList<Comment> array = new ArrayList<>();
+		LinkedList<Comment> list = new LinkedList<>();
 		try {
 			stmt = con.prepareStatement(SQL);
 			stmt.setInt(1, post);
-
+			
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				Comment comment=new Comment();
+				comment.setCommentNum(rs.getInt("comment_num"));
+				comment.setReCommentGroup(rs.getInt("re_comment_group"));
 				comment.setCommentContents(rs.getString("comment_contents"));
 				comment.setMemberId(rs.getString("member_id"));
 				comment.setCommentDay(rs.getDate("comment_day").toString());
-				array.add(comment);
+				list.add(comment);
 			}
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}
-		return array;
+		return list;
 	}
 	public boolean insertComment(final Comment comment) {
 		String SQL = "INSERT INTO Comment(notice_num,member_id,comment_contents) VALUES(?,?,?)";
