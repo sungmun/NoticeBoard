@@ -2,9 +2,27 @@
 	commentLoad();
 
 	function commentWrite(list){
+		console.log(list);
+		var pre_comment=null;
+		var comment_deep_count=0;
+		var comment_deep=40;
+		//	    margin-left: 40px;
+
 		$('#comment>div').remove();
 		$.each(list,function(index,comment){
+			console.log(pre_comment);
+			console.log(comment_deep_count);
 			var total=$('<div/>');
+			
+			if(pre_comment == null){
+			}else if(pre_comment.commentNum==comment.reCommentGroup){
+				comment_deep_count++;
+				total.css('margin-left',(comment_deep*comment_deep_count)+'px');
+			}else if(pre_comment.reCommentGroup==comment.reCommentGroup){
+				total.css('margin-left',(comment_deep*comment_deep_count)+'px');
+			}else{
+				comment_deep_count=0;
+			}
 			
 			var post_meat=$('<div/>',{class:'post-meta'});
 			
@@ -32,6 +50,7 @@
 			
 			total.append(commentContent);
 			
+			pre_comment=comment;
 			$('#comment').append(total);
 		});
 		
