@@ -20,7 +20,7 @@ public class CommentDAO extends DataAcessObject {
 	}
 
 	public LinkedList<Comment> getCommentList(final int post) {
-		String SQL = "SELECT * FROM Comment WHERE notice_num=? order by comment_day";
+		String SQL = "SELECT * FROM Comment WHERE notice_num=? order by re_comment_group,comment_day";
 		
 		LinkedList<Comment> list = new LinkedList<>();
 		try {
