@@ -4,6 +4,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import Exception.SQLCustomException;
+
 
 
 public class DataAcessObject {
@@ -16,9 +18,7 @@ public class DataAcessObject {
 		try {
 			con = DriverManager.getConnection(PrivateData.dataBaseUrl, PrivateData.dataBaseId, PrivateData.dataBasePassword);
 		} catch(SQLException e) {
-			System.err.println("=============================");
-			System.err.println("Connection Error");
-			System.err.println("=============================");
+			throw new SQLCustomException("Connection Error",e);
 		}
 	}
 
