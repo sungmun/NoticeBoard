@@ -45,7 +45,6 @@ public class CheckServlet extends HttpServlet {
 		try {
 			dao = UserDAO.createUserDAO();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		}
 		response.setCharacterEncoding("UTF-8");
 		JsonObject json=new JsonObject();

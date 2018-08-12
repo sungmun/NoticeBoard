@@ -1,6 +1,5 @@
 package database.Comment;
 
-import java.util.Collection;
 import java.util.LinkedList;
 
 public class CommentList extends LinkedList<Object> {
