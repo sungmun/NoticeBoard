@@ -34,7 +34,7 @@
 					<div></div>
 				</div>
 			</div>
-			<div class="panel section comment col-sm-10">
+			<div class="panel section comment col-sm-10" id="comment_input">
 				<div class="form-group">
 					<label class="sr-only">comment</label>
 					<div class="input-group">
@@ -49,6 +49,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<c:import url="/public/tail.jsp">
 		<c:param name="js" value="/NoticeBoard/JavaServerPage/Contents/js/default.js"></c:param>
 	</c:import>
