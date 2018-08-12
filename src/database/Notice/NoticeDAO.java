@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import Exception.SQLCustomException;
 import database.DataAcessObject;
 
 public class NoticeDAO extends DataAcessObject {
@@ -45,7 +46,7 @@ public class NoticeDAO extends DataAcessObject {
 				array.add(notice);
 			}
 		} catch (SQLException e) {
-			errMessageprint(e, "NoticeDAO.getNoticeList()");
+			throw new SQLCustomException("NoticeDAO.getNoticeList()",e);
 		}
 
 		return array;
@@ -59,7 +60,7 @@ public class NoticeDAO extends DataAcessObject {
 				return rs.getInt("cnt");
 			}
 		} catch (SQLException e) {
-			errMessageprint(e, "NoticeDAO.getNoticeCount()");
+			throw new SQLCustomException("NoticeDAO.getNoticeCount()",e);
 		}
 		return -1;
 	}
@@ -87,7 +88,7 @@ public class NoticeDAO extends DataAcessObject {
 			notice.setNotice_count(rs.getInt("notice_count"));
 			notice.setNotice_num(rs.getInt("notice_num"));
 		} catch (SQLException e) {
-			errMessageprint(e, "NoticeDAO.getNotice()");
+			throw new SQLCustomException("NoticeDAO.getNotice()",e);
 		}
 		return notice;
 	}
@@ -113,18 +114,7 @@ public class NoticeDAO extends DataAcessObject {
 			stmt.execute();
 			return true;
 		} catch (SQLException e) {
-			errMessageprint(e, "NoticeDAO.insertNotice(" + notice + ")");
+			throw new SQLCustomException("NoticeDAO.insertNotice(" + notice + ")",e);
 		}
-		return false;
-	}
-
-	public void errMessageprint(Exception e, String callMethod) {
-		System.err.println("=======================================");
-		System.err.println(callMethod);
-		System.err.println(e.getMessage());
-		if (e instanceof SQLException) {
-			System.err.println(((SQLException) e).getSQLState());
-		}
-		System.err.println("=======================================");
 	}
 }
