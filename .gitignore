@@ -47,3 +47,4 @@ release.properties
 dependency-reduced-pom.xml
 src/database/PrivateData.java
 SQLFile/NoticeSelectSQL.sql
+src/FTPServer/PrivateData.java
