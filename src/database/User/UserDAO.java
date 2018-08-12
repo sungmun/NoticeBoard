@@ -3,6 +3,7 @@ package database.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import Exception.SQLCustomException;
 import database.DataAcessObject;
 
 public class UserDAO extends DataAcessObject {
@@ -16,6 +17,7 @@ public class UserDAO extends DataAcessObject {
 		InstanseUserDAO = (InstanseUserDAO == null) ? new UserDAO() : InstanseUserDAO;
 		return InstanseUserDAO;
 	}
+
 	public User searchUser(String id) {
 		final String SQL = "Select * from User where user_id = ?";
 		try {
@@ -23,7 +25,7 @@ public class UserDAO extends DataAcessObject {
 			stmt.setString(1, id);
 			ResultSet rs = stmt.executeQuery();
 			rs.next();
-			User user=new User();
+			User user = new User();
 			user.setId(rs.getString("user_id"));
 			user.setFirstname(rs.getString("user_firstname"));
 			user.setSecondname(rs.getString("user_secondname"));
@@ -31,10 +33,10 @@ public class UserDAO extends DataAcessObject {
 			user.setJoindate(rs.getDate("joindate"));
 			return user;
 		} catch (SQLException e) {
-			errMessageprint(e, "UserDAO.selectUser(" + id + ")");
-		}
-		return null;
+			throw new SQLCustomException("UserDAO.selectUser(" + id + ")",e);
+		}	
 	}
+
 	public User selectUser(String id, String password) {
 		final String SQL = "Select * from User where user_id = ? AND user_password = ?";
 		try {
@@ -43,7 +45,7 @@ public class UserDAO extends DataAcessObject {
 			stmt.setString(2, password);
 			ResultSet rs = stmt.executeQuery();
 			rs.next();
-			User user=new User();
+			User user = new User();
 			user.setId(rs.getString("user_id"));
 			user.setPassword(rs.getString("user_password"));
 			user.setFirstname(rs.getString("user_firstname"));
@@ -54,10 +56,10 @@ public class UserDAO extends DataAcessObject {
 			user.setJoindate(rs.getDate("joindate"));
 			return user;
 		} catch (SQLException e) {
-			errMessageprint(e, "UserDAO.selectUser(" + id + "," + password + ")");
+			throw new SQLCustomException( "UserDAO.selectUser(" + id + "," + password + ")",e);
 		}
-		return null;
 	}
+
 	public boolean updateUser(User user) {
 		String SQL = "UPDATE User SET user_password = ?, user_phone = ? , user_email = ?) where user_id = ? ";
 
@@ -68,13 +70,13 @@ public class UserDAO extends DataAcessObject {
 			stmt.setString(3, user.getEmail());
 			stmt.setString(4, user.getId());
 			stmt.execute();
-			
+
 			return true;
 		} catch (SQLException e) {
-			errMessageprint(e, "UserDAO.insertUser("+user+")");
+			throw new SQLCustomException("UserDAO.insertUser(" + user + ")",e);
 		}
-		return false;
 	}
+
 	public boolean insertUser(User user) {
 		final String SQL = "INSERT INTO User (user_id,user_password,user_firstname,user_secondname,user_phone,user_email) VALUES (?,?,?,?,?,?)";
 
@@ -89,20 +91,10 @@ public class UserDAO extends DataAcessObject {
 			stmt.execute();
 			return true;
 		} catch (SQLException e) {
-			errMessageprint(e, "UserDAO.insertUser("+user+")");
+			throw new SQLCustomException("UserDAO.insertUser(" + user + ")",e);
 		}
-		return false;
 	}
 
-	public void errMessageprint(Exception e, String callMethod) {
-		System.err.println("=======================================");
-		System.err.println(callMethod);
-		System.err.println(e.getMessage());
-		if (e instanceof SQLException) {
-			System.err.println(((SQLException) e).getSQLState());
-		}
-		System.err.println("=======================================");
-	}
 
 	public boolean isIdDuplicateCheck(String id) {
 		final String SQL = "Select * from User where user_id = ?";
@@ -110,9 +102,10 @@ public class UserDAO extends DataAcessObject {
 			stmt = con.prepareStatement(SQL);
 			stmt.setString(1, id);
 			ResultSet rs = stmt.executeQuery();
-			if(rs.next())	return true;
-		}catch (SQLException e) {
-			errMessageprint(e, "UserDAO.isIdDuplicateCheck("+id+")");
+			if (rs.next())
+				return true;
+		} catch (SQLException e) {
+			throw new SQLCustomException("UserDAO.isIdDuplicateCheck(" + id + ")",e);
 		}
 		return false;
 	}
