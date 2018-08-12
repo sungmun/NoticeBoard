@@ -2,8 +2,6 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -53,7 +51,7 @@ public class ReadCommentServlet extends HttpServlet {
 		Comment[] arraylist=list.toArray(new Comment[list.size()]);
 		
 		JsonObject json=new JsonObject();
-		json.addProperty("list", new Gson().toJson(list));
+		json.addProperty("list", new Gson().toJson(arraylist));
 		
 		write.println(json);
 	}

@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.JsonObject;
-
 import Exception.JsProcessException;
 import database.Comment.Comment;
 import database.Comment.CommentDAO;
@@ -38,11 +36,13 @@ public class WriteCommentServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("login");
 
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter write =response.getWriter();
 		try {
 			if (commentContents == "")
-				throw new JsProcessException("댓글이 없습니다. 댓글을 달아 주세요");
+				throw new JsProcessException(write,"댓글이 없습니다. 댓글을 달아 주세요");
 			else if (user == null)
-				throw new JsProcessException("로그인을 하고 댓글을 달아 주세요");
+				throw new JsProcessException(write,"로그인을 하고 댓글을 달아 주세요");
 			Comment comment = new Comment();
 			comment.setCommentContents(commentContents);
 			comment.setMemberId(user.getId());
@@ -55,11 +55,7 @@ public class WriteCommentServlet extends HttpServlet {
 			} catch (ClassNotFoundException e) {
 			}
 		} catch (JsProcessException e) {
-			response.setCharacterEncoding("UTF-8");
-			PrintWriter write = response.getWriter();
-			JsonObject json = new JsonObject();
-			json.addProperty("err", e.getMessage());
-			write.println(json);
+			e.printStackTrace();
 		}
 	}
 
