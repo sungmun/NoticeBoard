@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
+import Exception.SQLCustomException;
 import database.DataAcessObject;
 
 public class CommentDAO extends DataAcessObject {
@@ -37,7 +38,7 @@ public class CommentDAO extends DataAcessObject {
 				list.add(comment);
 			}
 		} catch (SQLException e) {
-			System.err.println(e.getMessage());
+			throw new SQLCustomException(SQL, e);
 		}
 		return list;
 	}
@@ -53,8 +54,7 @@ public class CommentDAO extends DataAcessObject {
 			stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-			return false;
+			throw new SQLCustomException(SQL, e);
 		}
 	}
 }
