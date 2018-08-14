@@ -12,6 +12,8 @@ public class SQLCustomException extends RuntimeException{
 		System.err.println("=======================================");
 		System.err.println(message);
 		System.err.println(e.getSQLState());
+		System.err.println(e.getNextException());
+		System.err.println(e.getErrorCode());
 		e.printStackTrace();
 		System.err.println("=======================================");
 	}
