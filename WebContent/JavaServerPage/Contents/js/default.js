@@ -1,14 +1,13 @@
-	var postNum=$('#postNum').text();
+	var postNum=$('#post').data('noticenum');
 	commentLoad();
 
 	function commentWrite(list){
-		console.log(list);
 		var pre_comment=null;
 		var comment_deep_count=0;
 		var comment_deep=40;
 		// margin-left: 40px;
 
-		$('#comment>div').remove();
+		$('#comment>blockquote').remove();
 		$.each(list,function(index,comment){
 			
 			var memberid=$('<div/>',{class:'pull-left'});
@@ -43,10 +42,11 @@
 				class:'pull-right',
 				text:'댓글달기'
 			}));
-//			addComment.append($('#comment_input>div>.input-group'))
+// addComment.append($('#comment_input>div>.input-group'))
 			var total=$('<blockquote/>',{
 				css: {'font-size':'13px'}
 			});
+			total.data('comment',comment);
 			if(pre_comment != null&&pre_comment.commentNum==comment.reCommentGroup){
 				comment_deep_count++;
 			}else{
@@ -64,8 +64,34 @@
 		
 	}
 	
+	$(document).on('click','blockquote #send',function(){
+		var send=$(this).parent();
+		var data={
+				commentContents:'',
+				commentDay:'',
+				commentNum:482,
+				memberId:"tmuzzullo7r",
+				noticeNum:0,
+				reCommentGroup:482,
+		}
+	});
+	
+	var footer=null;
 	$(document).on('click','blockquote>.panel-footer>a',function(){
-		var footer=$(this).parent();
+		if(footer==null){
+			footer=$(this).parent();
+		}else{
+			footer.text('');
+			footer.css( {'font-size':'10px',
+				'padding-top': '3px',
+				'padding-bottom':'15px'
+				});
+			footer.append($('<a/>',{
+				class:'pull-right',
+				text:'댓글달기'
+			}));
+			footer=$(this).parent();
+		}
 		footer.css({
 			'padding-top': '5px',
 			'padding-bottom':'5px'
@@ -75,7 +101,7 @@
 	});
 	
 	$("#send").click(function() {
-		ajax("/NoticeBoard/WriteComment",{post:'${notice.notice_num}',contents:$('#comment-area').val()},(json)=>showErrorModal(json.err));
+		ajax("/NoticeBoard/WriteComment",{post:postNum,contents:$('#comment-area').val()},(json)=>showErrorModal('경고',json.err));
 		commentLoad('${notice.notice_num}');
 	});
 	
