@@ -10,11 +10,10 @@
 </head>
 <body>
 	<c:import url="/public/Topbar.jsp"></c:import>
-	<div id="postNum" style="display:none;">${notice.notice_num}</div>
 	<div class="container">
 		<div class="main">
 
-			<div class="col-sm-10 section">
+			<div class="col-sm-10 section" id="post" data-noticenum="${param.id}">
 				<header>
 					<h2 class="post_title">${notice.notice_title}</h2>
 					<p class="post-meta" style="color: #999;">
@@ -49,7 +48,7 @@
 			</div>
 		</div>
 	</div>
-	
+	<c:import url="/public/ErrorMessage.jsp"></c:import>
 	<c:import url="/public/tail.jsp">
 		<c:param name="js" value="/NoticeBoard/JavaServerPage/Contents/js/default.js"></c:param>
 	</c:import>
