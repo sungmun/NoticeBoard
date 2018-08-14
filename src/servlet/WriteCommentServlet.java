@@ -31,23 +31,31 @@ public class WriteCommentServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		boolean isReComment=request.getParameter("recommentgroup")!=null;
 		int post = Integer.parseInt(request.getParameter("post"));
+		int reCommentGroup = Integer.parseInt(isReComment?request.getParameter("recommentgroup"):"0");
 		String commentContents = request.getParameter("contents");
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("login");
-
+		System.err.println("===================");
+		System.err.println(user);
+		System.err.println(commentContents);
 		response.setCharacterEncoding("UTF-8");
-		PrintWriter write =response.getWriter();
+		PrintWriter write = response.getWriter();
 		try {
 			if (commentContents == "")
-				throw new JsProcessException(write,"댓글이 없습니다. 댓글을 달아 주세요");
+				throw new JsProcessException(write, "댓글이 없습니다.댓글을 달아 주세요");
 			else if (user == null)
-				throw new JsProcessException(write,"로그인을 하고 댓글을 달아 주세요");
+				throw new JsProcessException(write, "로그인을 하고 댓글을 달아 주세요");
 			Comment comment = new Comment();
 			comment.setCommentContents(commentContents);
 			comment.setMemberId(user.getId());
 			comment.setNoticeNum(post);
-
+			
+			if (reCommentGroup != 0) {
+				comment.setReCommentGroup(reCommentGroup);
+			}
+			
 			CommentDAO dao;
 			try {
 				dao = CommentDAO.createCommentDAO();
