@@ -1,1 +1,0 @@
-INSERT INTO NoticeContents VALUE(1,"TEST");

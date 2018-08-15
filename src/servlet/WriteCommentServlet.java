@@ -52,6 +52,8 @@ public class WriteCommentServlet extends HttpServlet {
 			comment.setMemberId(user.getId());
 			comment.setNoticeNum(post);
 			
+			
+			
 			if (reCommentGroup != 0) {
 				comment.setReCommentGroup(reCommentGroup);
 			}
