@@ -16,6 +16,7 @@ public class FTPServer {
 	public static FTPServer instance;
 
 	FTPClient client;
+
 	private FTPServer() {
 		client = new FTPClient();
 		client.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
@@ -38,10 +39,14 @@ public class FTPServer {
 	public static FTPServer newInstance() {
 		return (instance == null) ? new FTPServer() : instance;
 	}
-	
+
 	public void upload(File file, String uploadPath) throws IOException {
 		try (InputStream input = new FileInputStream(file)) {
 			this.client.storeFile(uploadPath, input);
 		}
+	}
+
+	public void changeDir(String dir) throws IOException {
+		client.changeWorkingDirectory("/HDD1/web/NoticeBoard" + (dir.equals("") ? "" : "/" + dir));
 	}
 }
