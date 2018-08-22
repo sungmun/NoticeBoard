@@ -49,4 +49,9 @@ public class FTPServer {
 	public void changeDir(String dir) throws IOException {
 		client.changeWorkingDirectory("/HDD1/web/NoticeBoard" + (dir.equals("") ? "" : "/" + dir));
 	}
+
+	public void makeDir(String dir) throws IOException {
+		client.makeDirectory(dir);
+		changeDir(dir);
+	}
 }
