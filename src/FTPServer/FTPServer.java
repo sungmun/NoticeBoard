@@ -54,4 +54,8 @@ public class FTPServer {
 		client.makeDirectory(dir);
 		changeDir(dir);
 	}
+
+	public InputStream download(String filePath) throws IOException {
+		return client.retrieveFileStream(filePath);
+	}
 }
