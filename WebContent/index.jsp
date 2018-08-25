@@ -43,7 +43,7 @@
 			</tbody>
 		</table>
 		<a
-			href="${pageContext.request.contextPath}/JavaServerPage/WritePage.jsp"
+			href="/NoticeBoard/JavaServerPage/Write/WritePage.jsp"
 			class="pull-right btn btn-default write">글쓰기</a>
 		<div class="alert-link text-center">
 			<ul class="pagination justify-content-center">
