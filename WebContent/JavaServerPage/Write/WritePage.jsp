@@ -8,8 +8,8 @@
 </head>
 <body>
 	<c:import url="/public/Topbar.jsp"></c:import>
-	<c:if test="${login} eq null">
-		<c:redirect url="/NoticeBoard/JavaServerPage/SingUp/SingUpPage.jsp"></c:redirect>
+	<c:if test="${login eq null}">
+		<c:redirect url="/JavaServerPage/SingUp/SingUpPage.jsp"></c:redirect>
 	</c:if>
 
 	<div class="container">
@@ -31,8 +31,7 @@
 	</div>
 	<c:import url="/public/tail.jsp">
 		<c:param name="js" value="/NoticeBoard/ckeditor4/ckeditor.js"></c:param>
-		<c:param name="js"
-			value="/NoticeBoard/JavaServerPage/Write/js/default.js"></c:param>
+		<c:param name="js" value="/NoticeBoard/JavaServerPage/Write/js/default.js"></c:param>
 	</c:import>
 </body>
 </html>
