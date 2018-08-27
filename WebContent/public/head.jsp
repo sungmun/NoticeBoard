@@ -10,7 +10,7 @@
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/default.css">
-<c:forEach var="cssItem" items="${param.css}">
+<c:forEach var="cssItem" items="${paramValues.css}">
 	<link rel="stylesheet" href="${cssItem}">
 </c:forEach>
 
@@ -18,7 +18,7 @@
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/CustomJS.js"></script>
 
-<c:forEach var="jsItem" items="${param.js}">
+<c:forEach var="jsItem" items="${paramValues.js}">
 	<script src="${jsItem}"></script>
 </c:forEach>
 
