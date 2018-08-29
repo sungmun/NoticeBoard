@@ -25,11 +25,12 @@ public class NoticeDAO extends DataAcessObject {
 	}
 
 	public ArrayList<Notice> getNoticeList(int page) {
-		return getNoticeList("SELECT * FROM Notice ORDER BY notice_num desc LIMIT ?, 20",page);
+		return getNoticeList("SELECT * FROM Notice ORDER BY notice_num desc LIMIT ?, 20", page);
 	}
+
 	public ArrayList<Notice> getNoticeList(final String SQL, int page) {
 		final int limit = 20;
-		
+
 		ArrayList<Notice> array = new ArrayList<>();
 		try {
 			stmt = con.prepareStatement(SQL);
@@ -46,12 +47,12 @@ public class NoticeDAO extends DataAcessObject {
 				array.add(notice);
 			}
 		} catch (SQLException e) {
-			throw new SQLCustomException("NoticeDAO.getNoticeList()",e);
+			throw new SQLCustomException("NoticeDAO.getNoticeList()", e);
 		}
 
 		return array;
 	}
-	
+
 	public int getNoticCount(final String SQL) {
 		try {
 			stmt = con.prepareStatement(SQL);
@@ -60,13 +61,15 @@ public class NoticeDAO extends DataAcessObject {
 				return rs.getInt("cnt");
 			}
 		} catch (SQLException e) {
-			throw new SQLCustomException("NoticeDAO.getNoticeCount()",e);
+			throw new SQLCustomException("NoticeDAO.getNoticeCount()", e);
 		}
 		return -1;
 	}
+
 	public int getNoticCount() {
 		return getNoticCount("SELECT COUNT(*) as cnt FROM Notice");
 	}
+
 	public Notice getNotice(int index_num) {
 
 		final String SQL = "SELECT Notice.notice_num, " + "Notice.notice_title," + "Notice.member_id,"
@@ -88,12 +91,12 @@ public class NoticeDAO extends DataAcessObject {
 			notice.setNotice_count(rs.getInt("notice_count"));
 			notice.setNotice_num(rs.getInt("notice_num"));
 		} catch (SQLException e) {
-			throw new SQLCustomException("NoticeDAO.getNotice()",e);
+			throw new SQLCustomException("NoticeDAO.getNotice()", e);
 		}
 		return notice;
 	}
 
-	public boolean insertNotice(Notice notice) {
+	public boolean insertNotice(Notice notice, String fileName) {
 		String SQL = "INSERT INTO Notice(notice_title, member_id) VALUE(?, ?)";
 		try {
 			stmt = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
@@ -107,14 +110,18 @@ public class NoticeDAO extends DataAcessObject {
 			if (rs.next()) {
 				pk = rs.getInt(1);
 			}
-			SQL = "INSERT INTO NoticeContents VALUE(?, ?)";
+			SQL = "INSERT INTO NoticeContents (notice_num,notice_contents" + ((fileName == null) ? "" : ",fileName")
+					+ ") VALUE(?, ?, ?)";
+
 			stmt = con.prepareStatement(SQL);
 			stmt.setInt(1, pk);
 			stmt.setString(2, notice.getNotice_contents());
+			if (fileName == null)
+				stmt.setString(3, fileName);
 			stmt.execute();
 			return true;
 		} catch (SQLException e) {
-			throw new SQLCustomException("NoticeDAO.insertNotice(" + notice + ")",e);
+			throw new SQLCustomException("NoticeDAO.insertNotice(" + notice + ")", e);
 		}
 	}
 }
