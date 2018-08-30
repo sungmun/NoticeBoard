@@ -21,8 +21,11 @@
 			</div>
 			<div class="form-group">
 				<label for="content">Content</label>
-				<textarea name="content" id="editor" class="form-control">
-            </textarea>
+				<textarea name="content" id="editor" class="form-control"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="upload">Upload</label>
+				<input type="file" name="upload" id="upload" class="form-control">
 			</div>
 			<div class="pull-right">
 				<button type="submit" class="btn btn-default">Sucess</button>
@@ -31,7 +34,8 @@
 	</div>
 	<c:import url="/public/tail.jsp">
 		<c:param name="js" value="/NoticeBoard/ckeditor4/ckeditor.js"></c:param>
-		<c:param name="js" value="/NoticeBoard/JavaServerPage/Write/js/default.js"></c:param>
+		<c:param name="js"
+			value="/NoticeBoard/JavaServerPage/Write/js/default.js"></c:param>
 	</c:import>
 </body>
 </html>
