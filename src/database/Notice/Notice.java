@@ -3,7 +3,7 @@ package database.Notice;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Notice implements Serializable{
+public class Notice implements Serializable {
 	/**
 	 * 
 	 */
@@ -13,6 +13,7 @@ public class Notice implements Serializable{
 	private String member_id;
 	private Date notice_date;
 	private String notice_contents;
+	private String file_name;
 	private int notice_count;
 
 	public int getNotice_num() {
@@ -63,10 +64,12 @@ public class Notice implements Serializable{
 		this.notice_count = notice_count;
 	}
 
-	@Override
-	public String toString() {
-		return "notice_title: " + notice_title + "\n" + "notice_contents: " + notice_contents + "\n"
-		+ "member_id: " + member_id + "\n";
+	public String getFile_name() {
+		return file_name;
+	}
+
+	public void setFile_name(String file_name) {
+		this.file_name = file_name;
 	}
 
 }
