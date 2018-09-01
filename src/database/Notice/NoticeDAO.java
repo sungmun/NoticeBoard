@@ -96,7 +96,7 @@ public class NoticeDAO extends DataAcessObject {
 		return notice;
 	}
 
-	public boolean insertNotice(Notice notice, String fileName) {
+	public boolean insertNotice(Notice notice) {
 		String SQL = "INSERT INTO Notice(notice_title, member_id) VALUE(?, ?)";
 		try {
 			stmt = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
@@ -110,14 +110,14 @@ public class NoticeDAO extends DataAcessObject {
 			if (rs.next()) {
 				pk = rs.getInt(1);
 			}
-			SQL = "INSERT INTO NoticeContents (notice_num,notice_contents" + ((fileName == null) ? "" : ",fileName")
+			SQL = "INSERT INTO NoticeContents (notice_num,notice_contents" + ((notice.getFile_name()== null) ? "" : ",fileName")
 					+ ") VALUE(?, ?, ?)";
 
 			stmt = con.prepareStatement(SQL);
 			stmt.setInt(1, pk);
 			stmt.setString(2, notice.getNotice_contents());
-			if (fileName == null)
-				stmt.setString(3, fileName);
+			if (notice.getFile_name() == null)
+				stmt.setString(3, notice.getFile_name());
 			stmt.execute();
 			return true;
 		} catch (SQLException e) {
