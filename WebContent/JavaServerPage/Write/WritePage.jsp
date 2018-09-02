@@ -14,7 +14,7 @@
 
 	<div class="container">
 		<form action="${pageContext.request.contextPath}/Write" method="post"
-			class="for">
+			class="for"enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="title">Title</label> <input type="text" name="title"
 					id="title" class="form-control">
