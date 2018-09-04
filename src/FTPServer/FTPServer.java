@@ -13,13 +13,11 @@ import org.apache.commons.net.ftp.FTPReply;
 
 public class FTPServer {
 
-	public static FTPServer instance;
 
 	FTPClient client;
 
-	private FTPServer() {
+	public FTPServer() {
 		client = new FTPClient();
-		client.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
 		int reply;
 		try {
 			client.connect(PrivateData.URL);
@@ -34,10 +32,6 @@ public class FTPServer {
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
-	}
-
-	public static FTPServer newInstance() {
-		return (instance == null) ? new FTPServer() : instance;
 	}
 
 	public void upload(File file, String uploadPath) throws IOException {
