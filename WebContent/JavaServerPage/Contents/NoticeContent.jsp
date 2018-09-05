@@ -21,8 +21,8 @@
 					</p>
 				</header>
 				<hr>
-				<p class="panel-body panel-default ">${notice.notice_contents}</p>
-
+				<div class="pull-right" style="color:gray;"><span class="glyphicon glyphicon-download-alt"></span>  download</div>
+				<div class="panel-body panel-default">${notice.notice_contents}</div>
 			</div>
 
 
