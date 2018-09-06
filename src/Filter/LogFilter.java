@@ -10,7 +10,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Servlet Filter implementation class Filter
@@ -37,12 +37,15 @@ public class LogFilter implements javax.servlet.Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
+		String url=((HttpServletRequest)request).getRequestURI();
+		printLog("--------------"+url+"--------------");
+		
 		request.setCharacterEncoding(defaultEncoding);
 		response.setCharacterEncoding(defaultEncoding);
 		printLog("[필터 사전작업 시간]: "+new Date(System.currentTimeMillis()).toString());
 		chain.doFilter(request, response);
 		printLog("[필터 사후작업 시간]: "+new Date(System.currentTimeMillis()).toString());
+
 	}
 
 	/**
@@ -58,6 +61,5 @@ public class LogFilter implements javax.servlet.Filter {
 	}
 	public void printLog(String log) {
 		printWrite.println(log);
-		System.out.println(log);
 	}
 }

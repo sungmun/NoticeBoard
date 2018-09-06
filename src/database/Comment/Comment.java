@@ -16,7 +16,7 @@ public class Comment implements Serializable {
 	 */
 	private int noticeNum;
 	private int commentNum;
-	private int reCommentGroup;
+	private int reCommentGroup = 0;
 	private String memberId;
 	private String commentContents;
 	private String commentDay;

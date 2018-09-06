@@ -5,16 +5,15 @@
     <welcome-file>index</welcome-file>
   </welcome-file-list>
   <filter>
-  	<filter-name>LogFilter</filter-name>
-  	<filter-class>LogFilter</filter-class>
-  	
-  	<init-param>
-  		<param-name>FILENAME</param-name>
-  		<param-value>/</param-value>
-  	</init-param>
+    <filter-name>LogFilter</filter-name>
+    <filter-class>Filter.LogFilter</filter-class>
+    <init-param>
+      <param-name>FILENAME</param-name>
+      <param-value>C:\Users\seungmun\Desktop\Study\Programing\Language\JSP\NoticeBoard\WebContent\log\Notice.log</param-value>
+    </init-param>
   </filter>
   <filter-mapping>
-  	<filter-name>LogFilter</filter-name>
-  	<url-pattern>*</url-pattern>
+    <filter-name>LogFilter</filter-name>
+    <url-pattern>*</url-pattern>
   </filter-mapping>
 </web-app>

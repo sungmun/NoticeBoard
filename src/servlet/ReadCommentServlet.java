@@ -36,16 +36,15 @@ public class ReadCommentServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int post = Integer.parseInt(request.getParameter("post"));
+
 		List<Comment> list = null;
 		try {
 			CommentDAO dao = CommentDAO.createCommentDAO();
 			list = dao.getCommentList(post);
 			
 		} catch (ClassNotFoundException e) {
-			System.err.println("error");
+			
 		}
-
-		response.setCharacterEncoding("UTF-8");
 		PrintWriter write= response.getWriter();
 		
 		Comment[] arraylist=list.toArray(new Comment[list.size()]);
