@@ -73,10 +73,9 @@ public class NoticeDAO extends DataAcessObject {
 	public Notice getNotice(int index_num) {
 
 		final String SQL = "SELECT Notice.notice_num, " + "Notice.notice_title," + "Notice.member_id,"
-				+ "NoticeContents.notice_contents," + "Notice.notice_date," + "Notice.notice_count " + "FROM Notice "
-				+ "JOIN NoticeContents " + "ON Notice.notice_num=NoticeContents.notice_num "
-				+ "WHERE Notice.notice_num = " + index_num;
-
+				+ "NoticeContents.notice_contents," + "Notice.notice_date," + "Notice.notice_count, "
+				+ "NoticeContents.fileName " + "FROM Notice " + "JOIN NoticeContents "
+				+ "ON Notice.notice_num=NoticeContents.notice_num " + "WHERE Notice.notice_num = " + index_num;
 		Notice notice = null;
 		try {
 			stmt = con.prepareStatement(SQL);
@@ -90,6 +89,7 @@ public class NoticeDAO extends DataAcessObject {
 			notice.setNotice_date(rs.getDate("notice_date"));
 			notice.setNotice_count(rs.getInt("notice_count"));
 			notice.setNotice_num(rs.getInt("notice_num"));
+			notice.setFile_name(rs.getString("fileName"));
 		} catch (SQLException e) {
 			throw new SQLCustomException("NoticeDAO.getNotice()", e);
 		}
@@ -110,8 +110,9 @@ public class NoticeDAO extends DataAcessObject {
 			if (rs.next()) {
 				pk = rs.getInt(1);
 			}
-			SQL = "INSERT INTO NoticeContents (notice_num,notice_contents" + ((notice.getFile_name()== null) ? "" : ",fileName")
-					+ ") VALUE(?, ?"+((notice.getFile_name()== null) ? "" : ", ?")+")";
+			SQL = "INSERT INTO NoticeContents (notice_num,notice_contents"
+					+ ((notice.getFile_name() == null) ? "" : ",fileName") + ") VALUE(?, ?"
+					+ ((notice.getFile_name() == null) ? "" : ", ?") + ")";
 
 			stmt = con.prepareStatement(SQL);
 			stmt.setInt(1, pk);
