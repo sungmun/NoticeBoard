@@ -15,12 +15,14 @@ public class FTPServer {
 
 
 	FTPClient client;
-
+	public PrintWriter write;
 	public FTPServer() {
 		client = new FTPClient();
-		int reply;
 		try {
 			client.connect(PrivateData.URL);
+
+			write=new PrintWriter(new File("C:\\Users\\seungmun\\Desktop\\Study\\Programing\\Language\\JSP\\NoticeBoard\\test.log"));
+			client.addProtocolCommandListener(new PrintCommandListener(write));
 			if (!FTPReply.isPositiveCompletion(client.getReplyCode())) {
 				client.disconnect();
 				throw new IOException("IOException in connecting to FTP Server");
@@ -33,7 +35,10 @@ public class FTPServer {
 			System.err.println(e.getMessage());
 		}
 	}
-
+	public void close() throws IOException{
+			client.logout();
+			client.disconnect();
+	}
 	public void upload(File file, String uploadPath) throws IOException {
 		try (InputStream input = new FileInputStream(file)) {
 			this.client.storeFile(uploadPath, input);
